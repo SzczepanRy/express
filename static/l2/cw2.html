@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            background-color: lightgreen;
+            border: 2px black solid;
+            border-radius: 5px;
+            padding: 30px;
+        }
+
+        .els {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin-left: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        .name {
+            display: flex;
+            margin-right: 10px;
+            align-items: center;
+        }
+
+        .email {
+            display: flex;
+            margin-right: 10px;
+            align-items: center;
+        }
+
+        input {
+            height: 20px;
+        }
+
+        .links {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>zadanie: newsletter</h1>
+
+    <form action="/handlePost" method="post">
+        <div class="els">
+            <div class="name">
+                <p>nick: </p>
+                <input name="name" type="text">
+            </div>
+            <div class="email">
+                <p>email: </p>
+                <input name="email" type="text">
+            </div>
+        </div>
+        <button type="submit">submit</button>
+    </form>
+    <div class="links">
+        <a href="/select">usuń email z użyciem slelecta</a>
+        <a href="/radio">usuń email z użyciem rodio</a>
+        <a href="/checkbox">usuń email z użyciem checkbox</a>
+    </div>
+
+
+</body>
+
+</html>
