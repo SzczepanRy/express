@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <input id="v1" type="number">
+    <input id="v2" type="number">
+    <select id="cal">
+        <option value="suma">+</option>
+        <option value="różnica">-</option>
+        <option value="iloczyn">*</option>
+        <option value="iloraz">/</option>
+        <option value="wszystko">wszystko</option>
+    </select>
+
+    <button id="button">submit</button>
+
+
+</body>
+<script>
+    const button = document.querySelector("#button")
+    button.addEventListener("click", async () => {
+        const v1 = document.querySelector("#v1").value
+        const v2 = document.querySelector("#v2").value
+        const calc = document.querySelector("#cal").value
+        let res = await fetch("http://localhost:3000/handleCal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                //    "Access-Control-Allow-Origin": "http://localhost:3000/handleCal"
+            },
+            body: JSON.stringify({
+                "v1": v1,
+                "v2": v2,
+                "cal": calc
+            })
+        })
+        let resdata = await res.json()
+        alert(JSON.stringify(resdata, null, 5))
+    })
+</script>
+
+</html>

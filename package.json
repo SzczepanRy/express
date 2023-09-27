@@ -1,21 +1,18 @@
 {
-	"name": "express",
-	"version": "1.0.0",
-	"description": "",
-	"main": "server2.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-		"dev": "npx nodemon server.js"
-=======
-		"dev": "npx nodemon server4.js"
->>>>>>> 9ca49834cb96fd103215081ebe36fa26552d5c49
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"cookie-session": "^2.0.0",
-		"express": "^4.18.2",
-		"nodemon": "^3.0.1"
-	}
+    "name": "express",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server2.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "npx nodemon server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cookie-session": "^2.0.0",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "nodemon": "^3.0.1"
+    }
 }
