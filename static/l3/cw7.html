@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .container {
+
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+
+        }
+
+        .left {
+            width: 50%;
+            height: 100%;
+        }
+
+        .right {
+            width: 50%;
+            height: 100%;
+        }
+
+        .headR {
+            background-color: lightgray;
+            color: white;
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contR {
+            height: calc(100% - 80px);
+            width: 100%;
+            background-color: darkgray;
+        }
+
+        .headL {
+            background-color: gray;
+            color: white;
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contL {
+            height: calc(100% - 80px);
+            width: 100%;
+            background-color: blueviolet;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="headL">
+                <h1>pozycja</h1>
+            </div>
+            <div class="contL"></div>
+        </div>
+        <div class="right">
+            <div class="headR">
+                <h1>pozycja</h1>
+
+            </div>
+            <div class="contR"></div>
+        </div>
+    </div>
+    <script>
+        let points = []
+        const contR = document.querySelector(".contR")
+        const contL = document.querySelector(".contL")
+
+        let dates = []
+        contL.addEventListener("click", async (e) => {
+            points.push({ "x": e.clientX, "y": e.clientY })
+            points.map((el) => {
+                let i = document.createElement("div")
+                i.innerText = `${(el.x - 10)} , ${(el.y - 5)}`
+                i.style.position = "absolute"
+                i.style.left = (el.x - 10) + 'px'
+                i.style.top = (el.y - 5) + "px"
+                contL.appendChild(i)
+            })
+            let d1 = Date.now()
+            let res = await fetch("http://localhost:3000/call", {
+                method: "post",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({ points })
+
+            })
+
+            let data = await res.json()
+            let d2 = Date.now()
+            contR.innerHTML = ""
+
+            dates.push(d2 - d1)
+            let y = 0
+            data.map((el) => {
+
+                let i = document.createElement("div")
+                i.innerText = dates[y]
+                i.style.position = "absolute"
+                i.style.left = (el.x + Number(contL.offsetWidth)) + "px"
+                i.style.top = el.y + "px"
+                y++
+                contR.appendChild(i)
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>
