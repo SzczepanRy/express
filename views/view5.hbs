@@ -1,0 +1,19 @@
+<h1>
+	{{context.subject}}
+
+</h1>
+<form action='http://localhost:3000/data' method='get'>
+	{{! <select name='dis' id='' size='3'> }}
+	{{#each context.fields}}
+		<input class='red' type="checkbox" name="{{name}}" value={{name}}>{{name}}</input>
+	{{/each}}
+	{{! </select> }}
+
+	<button type='submit' class='but'>
+		submit
+	</button>
+</form>
+
+{{#each dis}}
+	  <h1>{{val.author}} , {{val.lang}} , {{val.title}}</h1>  
+{{/each}}

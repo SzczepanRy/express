@@ -1,20 +1,19 @@
 <h1>
-    {{context.subjects}}
-</h1>
-<form action="/data" method="get">
-    <select name="dis" id="" size="3">
-        {{#each context.fields}}
-        <option class="red" value={{name}}>{{name}}</option>
-        {{/each}}
-    </select>
+	{{context.subject}}
 
-    <button type="submit" class="but">
-        submit
-    </button>
+</h1>
+<form action='/data' method='get'>
+	<select name='dis' id='' size='3'>
+		{{#each context.fields}}
+			<option class='red' value={{name}}>{{name}}</option>
+		{{/each}}
+	</select>
+
+	<button type='submit' class='but'>
+		submit
+	</button>
 </form>
 
-
-
 {{#each dis}}
-<h1>{{val}}</h1>
+	<h1>{{val}}</h1>
 {{/each}}
