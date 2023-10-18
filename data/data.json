@@ -1,0 +1,43 @@
+{
+	"subject": "T: ćwiczenie 12 - pogoda",
+	"header": "prognoza pogody",
+	"footer": "prognoza długoterminowa",
+	"locations": [
+		{
+			"name": "Kraków",
+			"forecastUrl": "https://pogoda.onet.pl/prognoza-pogody/krakow-306020",
+			"iconUrl": "https://ocdn.eu/ucs/static/pogoda/a7fd3df9f95be52a18abdfc7b9467ba1/mainWidget/png_icons/1.png",
+			"weather": "Słonecznie",
+			"temp": 3,
+
+			"smogUrl": "data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA2MCI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTN7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojNkVBODM3O30uY2xzLTIsLmNscy0ze2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPjwvZGVmcz48dGl0bGU+VmVjdG9yIFNtYXJ0IE9iamVjdDwvdGl0bGU+PGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIzMCIgY3k9IjMwIiByPSIyOS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTMwLDU2LjE4QTI2LjE4LDI2LjE4LDAsMSwwLDMuODIsMzAsMjYuMTksMjYuMTksMCwwLDAsMzAsNTYuMTgiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0zNS44OCw0MC4zOWEyLjE4LDIuMTgsMCwxLDEsMCw0LjM1SDI0LjEyYTIuMTgsMi4xOCwwLDEsMSwwLTQuMzVaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNNDAuNCwyNi43MWEyLjE2LDIuMTYsMCwwLDEsMS41NC42NGgwYTIuMTksMi4xOSwwLDAsMSwuNjMsMS41NHYyLjIyYTIuMTgsMi4xOCwwLDAsMS0uNjMsMS41NGgwYTIuMTcsMi4xNywwLDAsMS0zLjA4LDBoMGEyLjE5LDIuMTksMCwwLDEtLjY0LTEuNTRWMjguODlhMi4yLDIuMiwwLDAsMSwuNjQtMS41NGgwYTIuMTYsMi4xNiwwLDAsMSwxLjU0LS42NG0tMjAuOCwwYTIuMTQsMi4xNCwwLDAsMSwxLjU0LjY0aDBhMi4yLDIuMiwwLDAsMSwuNjQsMS41NHYyLjIyYTIuMTksMi4xOSwwLDAsMS0uNjQsMS41NCwyLjE0LDIuMTQsMCwwLDEtMS41NC42NCwyLjEyLDIuMTIsMCwwLDEtMS41My0uNjRoMGEyLjE4LDIuMTgsMCwwLDEtLjYzLTEuNTRWMjguODlhMi4xOSwyLjE5LDAsMCwxLC42My0xLjU0aDBBMi4xNCwyLjE0LDAsMCwxLDE5LjYsMjYuNzFaIi8+PC9zdmc+",
+			"smogTitle": "UMIARKOWANE",
+
+			"smogDesc": "Jakość powietrza jest akceptowalna. Osoby wrażliwe (  dzieci,osoby starsze,kobiety w ciąży) powinny ograniczyć aktywnośćruchową na zewnątrz."
+		},
+		{
+			"name": "Warszawa",
+			"forecastUrl": "https://pogoda.onet.pl/prognoza-pogody/warszawa-357732",
+			"iconUrl": "https://ocdn.eu/ucs/static/pogoda/a7fd3df9f95be52a18abdfc7b9467ba1/mainWidget/png_icons/3.png",
+			"weather": "Pochmurno",
+			"temp": 3,
+
+			"smogUrl": "data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA2MCI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTN7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojQ0IwQjFDO30uY2xzLTIsLmNscy0ze2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPjwvZGVmcz48dGl0bGU+VmVjdG9yIFNtYXJ0IE9iamVjdDwvdGl0bGU+PGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIzMCIgY3k9IjMwIiByPSIyOS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTMwLDU2LjE4QTI2LjE4LDI2LjE4LDAsMSwwLDMuODIsMzAsMjYuMTgsMjYuMTgsMCwwLDAsMzAsNTYuMTgiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik00NC43NSw0Ni4yMWEyLjIsMi4yLDAsMCwwLS42NC0xLjU0aDBhMjAsMjAsMCwwLDAtMjguMjIsMGgwYTIuMTksMi4xOSwwLDAsMCwwLDMuMDdoMGEyLjE3LDIuMTcsMCwwLDAsMS41NC42NEEyLjE0LDIuMTQsMCwwLDAsMTksNDcuNzRoMGExNS42MiwxNS42MiwwLDAsMSwyMi4wNiwwaDBhMi4xNywyLjE3LDAsMCwwLDEuNTQuNjRoMGEyLjEyLDIuMTIsMCwwLDAsMS41My0uNjRoMGEyLjE4LDIuMTgsMCwwLDAsLjY0LTEuNTMiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik00MC40LDI2LjcxYTIuMTYsMi4xNiwwLDAsMSwxLjU0LjY0aDBhMi4yLDIuMiwwLDAsMSwuNjQsMS41NHYyLjIyYTIuMTksMi4xOSwwLDAsMS0uNjQsMS41NGgwYTIuMTcsMi4xNywwLDAsMS0zLjA4LDBoMGEyLjE5LDIuMTksMCwwLDEtLjY0LTEuNTRWMjguODlhMi4yLDIuMiwwLDAsMSwuNjQtMS41NGgwYTIuMTYsMi4xNiwwLDAsMSwxLjU0LS42NG0tMjAuOCwwYTIuMTQsMi4xNCwwLDAsMSwxLjU0LjY0aDBhMi4yLDIuMiwwLDAsMSwuNjQsMS41NHYyLjIyYTIuMTcsMi4xNywwLDAsMS0zLjcxLDEuNTRoMGEyLjE4LDIuMTgsMCwwLDEtLjYzLTEuNTRWMjguODlhMi4xOSwyLjE5LDAsMCwxLC42My0xLjU0aDBBMi4xNCwyLjE0LDAsMCwxLDE5LjYsMjYuNzFaIi8+PC9zdmc+",
+			"smogTitle": "BARDZO ZŁE",
+
+			"smogDesc": "Jakość powietrza jest bardzo zła i ma negatywny wpływ na zdrowie.Ograniczyć przebywanie na wolnym powietrzu do niezbędnegominimum."
+		},
+		{
+			"name": "Poznań",
+			"forecastUrl": "https://pogoda.onet.pl/prognoza-pogody/poznan-335979",
+			"iconUrl": "https://ocdn.eu/ucs/static/pogoda/a7fd3df9f95be52a18abdfc7b9467ba1/mainWidget/png_icons/7.png",
+			"weather": "Pochmurno z opadami deszczu",
+			"temp": 5,
+
+			"smogUrl": "data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA2MCI+PGRlZnM+PHN0eWxlPi5jbHMtMSwuY2xzLTN7ZmlsbDojZmZmO30uY2xzLTJ7ZmlsbDojRURDNDEwO30uY2xzLTIsLmNscy0ze2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPjwvZGVmcz48dGl0bGU+VmVjdG9yIFNtYXJ0IE9iamVjdDwvdGl0bGU+PGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIzMCIgY3k9IjMwIiByPSIyOS42OCIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTMwLDU2LjE4QTI2LjE4LDI2LjE4LDAsMSwwLDMuODIsMzAsMjYuMTksMjYuMTksMCwwLDAsMzAsNTYuMTgiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0zNS44OCw0MC4zOWEyLjE4LDIuMTgsMCwxLDEsMCw0LjM1SDI0LjEyYTIuMTgsMi4xOCwwLDEsMSwwLTQuMzVaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNNDAuNCwyNi43MWEyLjE2LDIuMTYsMCwwLDEsMS41NC42NGgwYTIuMTYsMi4xNiwwLDAsMSwuNjQsMS41NHYyLjIyYTIuMTgsMi4xOCwwLDAsMS0uNjMsMS41NGgwYTIuMTIsMi4xMiwwLDAsMS0xLjUzLjY0LDIuMTYsMi4xNiwwLDAsMS0xLjU0LS42NGgwYTIuMTQsMi4xNCwwLDAsMS0uNjQtMS41NFYyOC44OWEyLjE2LDIuMTYsMCwwLDEsLjY0LTEuNTRoMGEyLjE2LDIuMTYsMCwwLDEsMS41NC0uNjRtLTIwLjgsMGEyLjE0LDIuMTQsMCwwLDEsMS41NC42NGgwYTIuMiwyLjIsMCwwLDEsLjY0LDEuNTR2Mi4yMmEyLjE5LDIuMTksMCwwLDEtLjY0LDEuNTQsMi4xNywyLjE3LDAsMCwxLTMuMDgsMGgwYTIuMTksMi4xOSwwLDAsMS0uNjQtMS41NFYyOC44OWEyLjIsMi4yLDAsMCwxLC42NC0xLjU0aDBBMi4xNCwyLjE0LDAsMCwxLDE5LjYsMjYuNzFaIi8+PC9zdmc+",
+			"smogTitle": "DOSTATECZNE",
+
+			"smogDesc": "Jakość powietrza jest dostateczna. Należy ograniczyć (skrócenie w czasie) aktywności na wolnym powietrzu dla osóbwrażliwych."
+		}
+	]
+}

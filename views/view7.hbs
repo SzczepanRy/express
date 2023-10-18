@@ -1,0 +1,19 @@
+<link rel='stylesheet' href='css/l5/style1.css' />
+
+<h1>
+	{{subject}}
+</h1>
+
+{{#each books}}
+	{{#if author}}
+		<h1>
+			{{author}}
+			{{title}}
+		</h1>
+
+	{{else}}
+		<h1>
+			brak autora
+		</h1>
+	{{/if}}
+{{/each}}

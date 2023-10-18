@@ -1,0 +1,46 @@
+<link rel='stylesheet' href='css/l5/style1.css' />
+
+<h1>
+	{{subject}}
+</h1>
+
+<div class='red'>
+	<h1>
+		{{#each countries}}
+			{{this}}
+		{{/each}}
+	</h1>
+	<hr />
+	<h1>
+		{{#each digits}}
+			{{#each this}}
+				{{this}}
+			{{/each}}
+		{{/each}}
+	</h1>
+	<hr />
+	<h1>
+		{{langs.[0]}}
+		
+	
+	</h1>
+    <h1>{{digits.[0].[1]}}</h1>
+    <hr/>
+    <h1>
+        {{#each countries}}
+            {{@index}}{{this}}
+        {{/each}}
+    </h1>
+    <hr/>
+    <h1>
+        {{#each user}}
+            {{@index}}  {{@key}}  {{this}},
+        {{/each}}
+    </h1>
+     <hr/>
+    <h1>
+        {{#each books}}
+            {{@index}}  {{this.title}},
+        {{/each}}
+    </h1>
+</div>
