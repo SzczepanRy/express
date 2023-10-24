@@ -1,0 +1,20 @@
+<h1>02 nedb - isert ,sort</h1>
+
+<form action="/handleInsert" method="get">
+    <input name="login" type="text" placeholder="login">
+    <input name="password" type="text" placeholder="password">
+
+    <button type="submit">submit</button>
+</form>
+
+
+{{#each docs}}
+<h4>{{this.timestamp}} , {{this.login}} , {{this.password}}</h4>
+{{/each}}
+
+
+<style>
+    form {
+        display: flex;
+    }
+</style>
