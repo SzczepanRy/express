@@ -6,20 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script defer>
-        const fd = new FormData()
 
-        const send = document.querySelector(".send")
-        // send.addEventListener(())
-    </script>
 </head>
 
 <body>
     <div class="container">
-        <input type="file" class="input">
+        <input type="file" id="fileInput" class="input">
         <button class="send">send</button>
     </div>
 
+
+    <script>
+        const fd = new FormData()
+        document.getElementById("fileInput").addEventListener("input", () => {
+            fd.append("file", document.getElementById("fileInput").files[0])
+            console.log(document.querySelector("#fileInput").files)
+
+        })
+
+
+
+        const send = document.querySelector(".send")
+
+        send.addEventListener("click", async () => {
+
+            const res = await fetch("http://localhost:3000/uploadM", {
+                method: "post",
+                //   headers: {
+                //       "content-type": "application/json",
+                // },
+                body: fd
+            })
+            console.log("aa")
+        })
+    </script>
 </body>
 
 </html>

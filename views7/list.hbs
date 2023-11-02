@@ -1,0 +1,25 @@
+<h1>
+	list cars page
+</h1>
+
+<div class='grid'>
+	<div class='title'>
+		<div class='_id'>_id</div>
+		<div class='ubez'>ubezpieczony</div>
+		<div class='benz'>benzyna</div>
+		<div class='uszk'>uzkodzony</div>
+		<div class='nape'>napend 4x4</div>
+	</div>
+
+	{{#each cars}}
+		<div class='CAR'>
+
+			<div class='_id'>{{this._id}}</div>
+
+			{{#each this.car}}
+				<div class='a'>{{getValue this}}</div>
+			{{/each}}
+			<button onclick='{alert(`{{{alertThis this}}}`)}'>info</button>
+		</div>
+	{{/each}}
+</div>

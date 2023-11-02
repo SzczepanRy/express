@@ -1,6 +1,9 @@
 {"name":"monitor","price":"1000","_id":"NDecyInUUH1J2LHg"}
 {"name":"kable","price":"50","_id":"OabZKvdCsGJLHnG6"}
-{"name":"klawiatura","price":"200","_id":"eefB8sB5n7VskNXT"}
 {"name":"klawiatura","price":"250","_id":"tpfbWz2RIPiCLSnK"}
-{"name":"mysz","price":"100","_id":"wPKJpK0LQkV2Kb57"}
-{"$$deleted":true,"_id":"wPKJpK0LQkV2Kb57"}
+{"$$deleted":true,"_id":"OabZKvdCsGJLHnG6"}
+{"$$deleted":true,"_id":"tpfbWz2RIPiCLSnK"}
+{"name":"kable","price":"50","_id":"OabZKvdCsGJLHnG6"}
+{"name":"klawiatura","price":"250","_id":"tpfbWz2RIPiCLSnK"}
+{"$$deleted":true,"_id":"OabZKvdCsGJLHnG6"}
+{"name":"kable","price":"50","_id":"OabZKvdCsGJLHnG6"}

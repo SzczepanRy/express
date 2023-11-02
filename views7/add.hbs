@@ -1,0 +1,19 @@
+<h1>add car page</h1>
+{{#if id}}
+	<h5>added car with id {{id}}</h5>
+{{/if}}
+<form action='/add/newcar' method='get'>
+	<input type='checkbox' name='ubezpieczny' value='TAK' id='ubez' />
+	<label for='ubezpieczny'>ubezpieczny</label>
+	<br />
+	<input type='checkbox' name='benzyna' value='TAK' id='benz' />
+	<label for='benzyna'>benzyna</label>
+	<br />
+	<input type='checkbox' name='uszkodzony' value='TAK' id='uszk' />
+	<label for='uszkodzony'>uszkodzony</label>
+	<br />
+	<input type='checkbox' name='napend4x4' value='TAK' id='nape' />
+	<label for='napend4x4'>napęd 4x4</label>
+	<br />
+	<button type='submit'>add</button>
+</form>

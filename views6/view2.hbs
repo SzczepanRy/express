@@ -1,20 +1,26 @@
 <h1>03 nedb - isert ,sort</h1>
 
-<form action="/handleDelete" method="get">
-    <div class="el">index , name , price</div>
-    {{#each docs}}
-    <div class="el">
-        <label for={{this._id}}> {{@index}} , {{this.name}} , {{this.price}}$ </label>
-        <input id={{this._id}} name="item" value={{this._id}} type="checkbox">
-    </div>
-
-    {{/each}}
-    <button type="submit">submit</button>
+<form action='/handleDelete' method='get'>
+	<div class='el'>index , name , price</div>
+	{{#each docs}}
+		<div class='el'>
+			<label for={{this._id}}>
+				{{@index}}
+				,
+				{{this.name}}
+				,
+				{{this.price}}$
+			</label>
+			<input id={{this._id}} name='item' value={{this._id}} type='checkbox' />
+		</div>
+	{{/each}}
+	<button type='submit'>submit</button>
+</form>
+<form action='/handleReload' method='get'>
+	<button>return data</button>
 </form>
 
-
-
-
+<h1>{{message}}</h1>
 
 <style>
 
