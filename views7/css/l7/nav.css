@@ -1,0 +1,12 @@
+.navbar {
+	padding-left: 30px;
+}
+
+.spec {
+	font-weight: 700;
+	color: coral !important;
+}
+
+.title > * {
+	font-weight: 500;
+}

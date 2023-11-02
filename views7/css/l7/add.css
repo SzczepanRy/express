@@ -1,0 +1,41 @@
+.add {
+	margin: 40px 80px;
+}
+
+h1 {
+	font-size: 52px;
+	font-family: monospace;
+}
+
+h5 {
+	padding: 20px;
+	width: 80vw;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	background-color: rgba(155, 198, 164, 0.252);
+	border: green 1px solid;
+	color: rgba(61, 69, 63, 0.663);
+	border-radius: 5px;
+}
+
+input {
+	margin-top: 10px;
+}
+
+button {
+	all: unset;
+	margin-top: 20px;
+	height: 30px;
+	width: 40px;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+a:hover {
+	cursor: pointer;
+}

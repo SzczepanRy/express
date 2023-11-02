@@ -1,1 +1,47 @@
-<h1>delete</h1>
+<link rel='stylesheet' href='css/l7/delete.css' />
+
+<div class='delete'>
+	<h1>delete cars page</h1>
+	<h2>{{message}}</h2>
+	<div>
+		<form class='grid' action='/delete/handle' method='get'>
+
+			<div class='func'>
+				<a
+					onclick="{window.confirm('delete all cars')? href='http://localhost:3000/delete/handle?_id=all': href='http://localhost:3000/delete'}"
+				>DELETE ALL CARS</a>
+
+				<button type='submit'>DELETE SELECTED</button>
+			</div>
+
+			<div class='title'>
+				<div class='_id'>_id</div>
+				<div class='ubez'>ubezpieczony</div>
+				<div class='benz'>benzyna</div>
+				<div class='uszk'>uzkodzony</div>
+				<div class='nape'>napend 4x4</div>
+				<div class='brD'></div>
+				<div class='br'></div>
+			</div>
+			{{#each cars}}
+				<div class='CAR'>
+
+					<div class='_id'>{{_id}}</div>
+					<div class='ubez'>{{ubezpieczony}}</div>
+					<div class='benz'>{{benzyna}}</div>
+					<div class='uszk'>{{uszkodzony}}</div>
+					<div class='nape'>{{napend4x4}}</div>
+
+					<a href='http://localhost:3000/delete/handle?_id={{_id}}'>delete</a>
+
+					<input id={{_id}} type='checkbox' name='_id' value={{_id}} />
+				</div>
+
+			{{/each}}
+		</form>
+	</div>
+	<style>
+		.grid{ display: flex; flex-direction: column; } .grid *{ display: flex;
+		padding: 10px; }
+	</style>
+</div>

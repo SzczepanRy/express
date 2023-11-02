@@ -1,0 +1,82 @@
+.delete {
+	margin: 40px 80px;
+}
+
+h1 {
+	font-size: 52px;
+	font-family: monospace;
+}
+
+.grid > * {
+	width: 80vw;
+	border-bottom: 1px solid gray;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.grid > * > * {
+	width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.func {
+	justify-content: start;
+}
+
+.CAR a {
+	all: unset;
+	background-color: red;
+	width: 60px;
+	height: 40px;
+	border-radius: 5px;
+	color: white !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.func a {
+	all: unset;
+	background-color: red;
+	width: 140px;
+	height: 40px;
+	border-radius: 5px;
+	color: white !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.func button {
+	all: unset;
+	background-color: gray;
+	width: 140px;
+	height: 40px;
+	border-radius: 5px;
+	color: white;
+	margin-left: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input {
+	height: 20px;
+	width: 20px;
+}
+
+.brD {
+	width: 60px;
+	height: 40px;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+.title > * {
+	font-weight: 500;
+}

@@ -13,31 +13,25 @@ const db = new Datastore({
 app.set('views', path.join(__dirname, 'views7')); // ustalamy katalog views
 app.engine(
 	'hbs',
-
 	hbs({
 		defaultLayout: 'main.hbs',
 		extname: '.hbs',
 		partialsDir: 'views7/partials',
 		helpers: {
-			getValue(el) {
-				return Object.values(el);
-			},
 			alertThis(el) {
+				console.log(el);
 				let str = '';
-				str += 'id : ' + el._id;
-
-				for (let i of el.car) {
-					str += `\n ${Object.keys(i)[0]} : ${Object.values(i)[0]} `;
+				for (let i = 0; i < 5; i++) {
+					str += `\n ${Object.keys(el)[i]} : ${Object.values(el)[i]}`;
 				}
 				console.log(str);
-
 				return str;
 			},
 		},
 	})
-); // domyślny layout, potem można go zmienić
-app.use(express.static('static'));
-app.set('view engine', 'hbs'); // określenie nazwy silnika szablonów
+);
+app.use(express.static(path.join(__dirname, '/views7')));
+app.set('view engine', 'hbs');
 
 app.get('/', function (req, res) {
 	res.render('index.hbs');
@@ -49,22 +43,20 @@ app.get('/add', function (req, res) {
 app.get('/add/newcar', function (req, res) {
 	const { ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.query;
 
+	let car = {};
+
 	attrib = [{ ubezpieczony }, { benzyna }, { uszkodzony }, { napend4x4 }];
 	console.log(attrib);
-	car = attrib.filter((el) => {
-		console.log(Object.values(el)[0]);
+	attrib.filter((el) => {
 		if (typeof Object.values(el)[0] != 'undefined') {
-			console.log('a');
-			return el;
+			car[Object.keys(el)[0]] = Object.values(el)[0];
 		} else {
-			console.log('b');
-
-			el[Object.keys(el)] = 'NIE';
-			return el;
+			car[Object.keys(el)[0]] = 'NIE';
 		}
 	});
 
-	db.insert({ car }, (err, el) => {
+	console.log(car);
+	db.insert(car, (err, el) => {
 		res.render('add.hbs', { id: el._id });
 	});
 });
@@ -74,14 +66,55 @@ app.get('/list', function (req, res) {
 		res.render('list.hbs', { cars });
 	});
 });
+
 app.get('/delete', function (req, res) {
-	res.render('delete.hbs');
-});
-app.get('/edit', function (req, res) {
-	res.render('edit.hbs');
+	db.find({}, (err, cars) => {
+		res.render('delete.hbs', { cars });
+	});
 });
 
-app.get('/handleInsert', (req, res) => {});
+app.get('/delete/handle', function (req, res) {
+	const { _id } = req.query;
+	let message = 'did not find a car';
+	console.log(_id);
+	if (typeof _id == 'object') {
+		for (let t of _id) {
+			db.remove({ _id: t });
+		}
+		message = 'deleted ' + _id.length + ' cars';
+	} else if (typeof _id == 'string') {
+		if (_id == 'all') {
+			db.remove({}, { multi: true });
+			message = 'deleted all cares';
+		} else {
+			db.remove({ _id: _id });
+			message = 'deleted one car';
+		}
+	}
+	db.find({}, (err, cars) => {
+		res.render('delete.hbs', { cars, message });
+	});
+});
+
+app.get('/edit', function (req, res) {
+	db.find({}, (err, cars) => {
+		res.render('edit.hbs', { cars });
+	});
+
+	// res.render('edit.hbs');
+});
+app.get('/edit/update', function (req, res) {
+	const { id, ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.query;
+	db.find({ _id: id }, (err, car) => {
+		console.log(car);
+		let updated = { ubezpieczony, benzyna, uszkodzony, napend4x4, _id: id };
+		db.remove({ _id: id });
+		db.insert(updated);
+		db.find({}, (err, cars) => {
+			res.render('edit.hbs', { cars });
+		});
+	});
+});
 
 app.listen(3000, () => {
 	console.log('good');

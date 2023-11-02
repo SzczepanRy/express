@@ -1,0 +1,65 @@
+.edity {
+	margin: 40px 80px;
+}
+
+h1 {
+	font-size: 52px;
+	font-family: monospace;
+}
+
+.grid > * {
+	width: 80vw;
+	border-bottom: 1px solid gray;
+	display: flex;
+	justify-content: space-between;
+}
+
+.grid > * > * {
+	width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	all: unset;
+	width: 40px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+}
+
+form select {
+	width: 100px;
+}
+
+form button {
+	width: 100px;
+	height: 30px;
+	background-color: red;
+	color: white;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+}
+
+.CAR {
+	display: flex;
+	align-items: center;
+}
+
+form {
+	width: 50vw !important;
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+.title > * {
+	font-weight: 500;
+}

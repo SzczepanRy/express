@@ -1,1 +1,68 @@
-<h1>edit</h1>
+<link rel='stylesheet' href='css/l7/edit.css' />
+<div class='edity'>
+	<h1>edit / update page</h1>
+
+	<div class='grid'>
+		<div class='title'>
+			<div class='_id'>_id</div>
+			<div class='ubez'>ubezpieczony</div>
+			<div class='benz'>benzyna</div>
+			<div class='uszk'>uzkodzony</div>
+			<div class='nape'>napend 4x4</div>
+
+			<div class='b'></div>
+		</div>
+
+		{{#each cars}}
+			<div class='CAR CAR{{@index}}'>
+				<div class='_id'>{{_id}}</div>
+				<form action='/edit/update' method='get'>
+					<input style='display: none;' name='id' value='{{{_id}}}' />
+					<select name='ubezpieczony'>
+						<option value='TAK'>TAK</option>
+						<option value='NIE'>NIE</option>
+						<option value='BRAK'>BRAK</option>
+					</select>
+					<select name='benzyna'>
+						<option value='TAK'>TAK</option>
+						<option value='NIE'>NIE</option>
+						<option value='BRAK'>BRAK</option>
+					</select>
+					<select name='uszkodzony'>
+						<option value='TAK'>TAK</option>
+						<option value='NIE'>NIE</option>
+						<option value='BRAK'>BRAK</option>
+					</select>
+					<select name='napend4x4'>
+						<option value='TAK'>TAK</option>
+						<option value='NIE'>NIE</option>
+						<option value='BRAK'>BRAK</option>
+					</select>
+
+					<button type='submit'>update</button>
+				</form>
+				<button
+					type='button'
+					class='cancel'
+					onclick="{document.querySelector('.CAR{{@index}}').style.display='none';document.querySelector('.b').style.width='100px'; document.querySelector('.carEdit{{@index}}').style.display='flex'}"
+				>cancel</button>
+			</div>
+			<div class='carEdit carEdit{{@index}}'>
+				<div class='_id'>{{_id}}</div>
+				<div class='ubez'>{{ubezpieczony}}</div>
+				<div class='benz'>{{benzyna}}</div>
+				<div class='uszk'>{{uszkodzony}}</div>
+				<div class='nape'>{{napend4x4}}</div>
+				<button
+					class='edit'
+					onclick="{document.querySelector('.CAR{{@index}}').style.display='flex';document.querySelector('.b').style.width='310px'; document.querySelector('.carEdit{{@index}}').style.display='none'}"
+				>edit</button>
+			</div>
+
+		{{/each}}
+	</div>
+	<style>
+		.grid{ display: flex; flex-direction: column; } .grid *{ display: flex;
+		padding: 10px; } .CAR{ display: none;}
+	</style>
+</div>
