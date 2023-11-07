@@ -1,0 +1,55 @@
+.el {
+    display: flex;
+
+}
+
+.nav {
+    display: flex;
+}
+
+.el>* {
+    min-height: 60px;
+    width: 120px;
+
+    background-color: gray;
+    margin: 5px;
+}
+
+.titles {
+    display: flex;
+
+}
+
+.titles>* {
+    height: 60px;
+    width: 120px;
+    background-color: yellow;
+    margin: 5px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.ra {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: gray;
+    justify-content: center;
+    margin: 5px;
+}
+
+.rab {
+    width: 90%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: gray;
+    justify-content: center;
+    margin: 5px;
+}

@@ -1,121 +1,87 @@
-const express = require('express');
-const app = express();
+const express = require("express")
 const hbs = require('express-handlebars');
-const path = require('path');
+const { appendFile } = require("fs");
+const path = require("path")
 
-const Datastore = require('nedb');
+const app = express()
+const data = require("./data.json")
 
-const db = new Datastore({
-	filename: './static/db/kolekcja7.db',
-	autoload: true,
-});
+app.set('views', path.join(__dirname, 'viewsTest'));         // ustalamy katalog views
+app.engine('hbs', hbs({
+    extname: '.hbs',
+    partialsDir: 'viewsTest/partials',
+    helpers: {
+        filterStars(items) {
+            let stars = []
+            items.map((el) => {
 
-app.set('views', path.join(__dirname, 'views7')); // ustalamy katalog views
-app.engine(
-	'hbs',
-	hbs({
-		defaultLayout: 'main.hbs',
-		extname: '.hbs',
-		partialsDir: 'views7/partials',
-		helpers: {
-			alertThis(el) {
-				console.log(el);
-				let str = '';
-				for (let i = 0; i < 5; i++) {
-					str += `\n ${Object.keys(el)[i]} : ${Object.values(el)[i]}`;
-				}
-				console.log(str);
-				return str;
-			},
-		},
-	})
-);
-app.use(express.static(path.join(__dirname, '/views7')));
-app.set('view engine', 'hbs');
+                if (!stars.includes(el.stars)) {
+                    stars.push(el.stars)
+                }
+            })
+            stars = stars.sort((a, b) => b - a).reverse()
+            console.log(stars);
 
-app.get('/', function (req, res) {
-	res.render('index.hbs');
-});
+            return stars
+        },
+        filterSelect(items) {
+            let selected = []
+            items.map((el) => {
+                if (!selected.includes(el.category)) {
+                    selected.push(el.category)
+                }
 
-app.get('/add', function (req, res) {
-	res.render('add.hbs');
-});
-app.get('/add/newcar', function (req, res) {
-	const { ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.query;
+            })
+            return selected
+        },
+        dispalyStars(stars) {
+            stars = Number(stars)
+            let arr = []
+            for (let i = 0; i < stars; i++) {
+                arr.push("http://4ia1.spec.pl.hostingasp.pl/test_uploadu/star.png")
 
-	let car = {};
+            }
 
-	attrib = [{ ubezpieczony }, { benzyna }, { uszkodzony }, { napend4x4 }];
-	console.log(attrib);
-	attrib.filter((el) => {
-		if (typeof Object.values(el)[0] != 'undefined') {
-			car[Object.keys(el)[0]] = Object.values(el)[0];
-		} else {
-			car[Object.keys(el)[0]] = 'NIE';
-		}
-	});
+            return arr
+        },
+        ///helper do dolarów ale pan odpuscił
+    }, defaultLayout: 'main.hbs'
+}));   // domyślny layout, potem można go zmienić
+app.use(express.static("static"))
+app.set('view engine', 'hbs');                           // określenie nazwy silnika szablonów
 
-	console.log(car);
-	db.insert(car, (err, el) => {
-		res.render('add.hbs', { id: el._id });
-	});
-});
 
-app.get('/list', function (req, res) {
-	db.find({}, (err, cars) => {
-		res.render('list.hbs', { cars });
-	});
-});
 
-app.get('/delete', function (req, res) {
-	db.find({}, (err, cars) => {
-		res.render('delete.hbs', { cars });
-	});
-});
+app.get("/", (req, res) => {
+    res.render("view.hbs", data)
+})
 
-app.get('/delete/handle', function (req, res) {
-	const { _id } = req.query;
-	let message = 'did not find a car';
-	console.log(_id);
-	if (typeof _id == 'object') {
-		for (let t of _id) {
-			db.remove({ _id: t });
-		}
-		message = 'deleted ' + _id.length + ' cars';
-	} else if (typeof _id == 'string') {
-		if (_id == 'all') {
-			db.remove({}, { multi: true });
-			message = 'deleted all cares';
-		} else {
-			db.remove({ _id: _id });
-			message = 'deleted one car';
-		}
-	}
-	db.find({}, (err, cars) => {
-		res.render('delete.hbs', { cars, message });
-	});
-});
+let items = []
+app.get("/filter", (req, res) => {
+    const { rating, category } = req.query
+    console.log(rating, category);
+    if (rating == undefined) {
+        res.render("view.hbs", data)
+    } else {
 
-app.get('/edit', function (req, res) {
-	db.find({}, (err, cars) => {
-		res.render('edit.hbs', { cars });
-	});
+        items = []
+        data.items.map((el) => {
+            console.log(el.category);
+            if (el.stars == Number(rating) && (el.category == category || category == "all")) {
+                console.log({ rating: el.stars, title: el.title });
+                items.push({ rating: el.stars, title: el.title })
+            }
+        })
+        console.log(items);
+        res.render("view2.hbs", { items })
+    }
 
-	// res.render('edit.hbs');
-});
-app.get('/edit/update', function (req, res) {
-	const { id, ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.query;
-	db.find({ _id: id }, (err, car) => {
-		console.log(car);
-		let updated = { ubezpieczony, benzyna, uszkodzony, napend4x4, _id: id };
-		db.remove({ _id: id });
-		db.insert(updated);
-		db.find({}, (err, cars) => {
-			res.render('edit.hbs', { cars });
-		});
-	});
-});
+})
+app.get("/lista", (req, res) => {
+    res.render("view2.hbs", { items })
+})
+app.get("/tabela", (req, res) => {
+    res.render("view3.hbs", { items })
+})
 
-app.listen(3000, () => {
-	console.log('good');
-});
+app.listen(3000, () => { console.log("aaaaa") })

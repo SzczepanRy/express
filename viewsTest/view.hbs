@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="css/test/style.css">
+<h1>SPRAWDZIAN</h1>
+
+<div class="nav">
+
+    <form action="http://localhost:3000/filter" method="get">
+        {{#each (filterStars items)}}
+        <input type="radio" value={{this}} name="rating" id="rad">
+        <label for="rad">{{this}}</label>
+        {{/each}}
+
+        <select name="category">
+            <option value="all">all</option>
+            {{#each (filterSelect items)}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+
+        <button type="submit">filter</button>
+
+
+
+    </form>
+
+
+</div>
+
+<div class="main">
+    <div class="titles">
+        <div class="e">
+            NAZWA
+        </div>
+        <div class="e">
+            Kategoria
+        </div>
+        <div class="e">
+            cena
+        </div>
+        <div class="e">
+            ocena
+        </div>
+    </div>
+    {{#each items}}
+    {{> el this=this}}
+    {{/each}}
+</div>

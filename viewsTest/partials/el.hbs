@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="css/test/style.css">
+
+<div class="el">
+
+    <div class="e">
+        {{this.title}}
+    </div>
+    <div class="e">
+        {{this.category}}
+    </div>
+    <div class="e">
+        {{this.price}}
+    </div>
+    <div class="e">
+
+        {{#each (dispalyStars this.stars)}}
+        <img src="{{this}}" alt="star">
+        {{/each}}
+    </div>
+
+
+</div>
