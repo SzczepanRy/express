@@ -10,6 +10,7 @@ const db = new Datastore({
 	autoload: true,
 });
 
+app.use(express.json());
 app.set('views', path.join(__dirname, 'views7')); // ustalamy katalog views
 app.engine(
 	'hbs',
@@ -40,8 +41,8 @@ app.get('/', function (req, res) {
 app.get('/add', function (req, res) {
 	res.render('add.hbs');
 });
-app.get('/add/newcar', function (req, res) {
-	const { ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.query;
+app.post('/add/newcar', function (req, res) {
+	const { ubezpieczony, benzyna, uszkodzony, napend4x4 } = req.body;
 
 	let car = {};
 
@@ -85,7 +86,7 @@ app.get('/delete/handle', function (req, res) {
 	} else if (typeof _id == 'string') {
 		if (_id == 'all') {
 			db.remove({}, { multi: true });
-			message = 'deleted all cares';
+			message = 'deleted all cars';
 		} else {
 			db.remove({ _id: _id });
 			message = 'deleted one car';

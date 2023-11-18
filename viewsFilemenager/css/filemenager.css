@@ -1,0 +1,85 @@
+/* .filemenager {
+	width: 80vw;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.filemenager > .title {
+	padding: 0px 40px;
+	height: 30px;
+	background-color: lightslategray;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.filemenager > .title > td {
+	color: white;
+	font-family: monospace;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+
+.filemenager > .file {
+	padding: 0px 40px;
+	height: 60px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	word-wrap: break-word;
+}
+
+.filemenager > .file > td {
+	color: darkslateblue;
+	font-family: monospace;
+	font-weight: 1000;
+	padding: 5px;
+}
+
+img {
+	width: 50px;
+	height: 50px;
+} */
+
+.filemenager {
+	width: 80vw;
+	height: min-content;
+}
+
+.title {
+	height: 1px;
+	background-color: lightslategray;
+	width: 100%;
+}
+
+.title > td {
+	color: white;
+	font-family: monospace;
+	font-weight: 400;
+	word-wrap: break-word;
+	margin: 0;
+}
+
+.file {
+	padding: 0px 40px;
+	height: 60px;
+	width: 100%;
+	word-wrap: break-word;
+}
+
+.file > td {
+	color: darkslateblue;
+	font-family: monospace;
+	font-weight: 1000;
+	padding: 5px;
+}
+
+img {
+	width: 50px;
+	height: 50px;
+}

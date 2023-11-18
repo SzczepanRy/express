@@ -1,87 +1,169 @@
-const express = require("express")
+const express = require('express');
+const app = express();
 const hbs = require('express-handlebars');
-const { appendFile } = require("fs");
-const path = require("path")
+const path = require('path');
+const formidable = require('formidable');
+app.use(express.json());
+app.set('views', path.join(__dirname, 'viewsFilemenager')); // ustalamy katalog views
+app.engine(
+	'hbs',
+	hbs({
+		defaultLayout: 'main.hbs',
+		extname: '.hbs',
+		partialsDir: 'viewsFilemenager/partials',
+		helpers: {},
+	})
+);
+app.use(express.static(path.join(__dirname, '/viewsFilemenager')));
+app.set('view engine', 'hbs');
 
-const app = express()
-const data = require("./data.json")
+app.get('/', (req, res) => {
+	res.render('upload.hbs', { currentPage: 'currentPage' });
+});
 
-app.set('views', path.join(__dirname, 'viewsTest'));         // ustalamy katalog views
-app.engine('hbs', hbs({
-    extname: '.hbs',
-    partialsDir: 'viewsTest/partials',
-    helpers: {
-        filterStars(items) {
-            let stars = []
-            items.map((el) => {
+let filesArr = [];
 
-                if (!stars.includes(el.stars)) {
-                    stars.push(el.stars)
-                }
-            })
-            stars = stars.sort((a, b) => b - a).reverse()
-            console.log(stars);
+app.post('/upload', (req, res) => {
+	let form = formidable({});
+	form.multiples = true;
+	form.uploadDir = __dirname + '/static/upload/'; // folder do zapisu zdjęcia
+	form.keepExtensions = true;
+	form.parse(req, function (err, fields, files) {
+		if (files.upload.length > 0) {
+			[...files.upload].forEach((file) => {
+				let id =
+					filesArr[filesArr.length - 1] === undefined
+						? 1
+						: filesArr[filesArr.length - 1].id + 1;
+				let obraz =
+					file.type == 'image/png'
+						? '/img/png.png'
+						: file.type == 'image/jpeg'
+						? '/img/jpg.png'
+						: file.type == 'text/plain'
+						? '/img/txt.png'
+						: file.type == 'text/javascript'
+						? '/img/javascript.png'
+						: file.type == 'text/html'
+						? '/img/html.png'
+						: file.type == 'text/css'
+						? '/img/css.png'
+						: '/img/file.png';
+				let name = file.name;
+				let size = file.size;
+				let type = file.type;
+				let path = file.path;
+				let savedate = Date.now();
+				let obj = { id, obraz, name, size, type, path, savedate };
+				console.log(obj);
+				filesArr.push(obj);
+			});
+		} else {
+			let file = files.upload;
+			let id =
+				filesArr[filesArr.length - 1] === undefined
+					? 1
+					: filesArr[filesArr.length - 1].id + 1;
+			let obraz =
+				file.type == 'image/png'
+					? '/img/png.png'
+					: file.type == 'image/jpeg'
+					? '/img/jpg.png'
+					: file.type == 'text/plain'
+					? '/img/txt.png'
+					: file.type == 'text/javascript'
+					? '/img/javascript.png'
+					: file.type == 'text/html'
+					? '/img/html.png'
+					: file.type == 'text/css'
+					? '/img/css.png'
+					: '/img/file.png';
 
-            return stars
-        },
-        filterSelect(items) {
-            let selected = []
-            items.map((el) => {
-                if (!selected.includes(el.category)) {
-                    selected.push(el.category)
-                }
+			let name = file.name;
+			let size = file.size;
+			let type = file.type;
+			let path = file.path;
+			let savedate = Date.now();
+			let obj = { id, obraz, name, size, type, path, savedate };
+			console.log(obj);
+			filesArr.push(obj);
+		}
 
-            })
-            return selected
-        },
-        dispalyStars(stars) {
-            stars = Number(stars)
-            let arr = []
-            for (let i = 0; i < stars; i++) {
-                arr.push("http://4ia1.spec.pl.hostingasp.pl/test_uploadu/star.png")
+		res.render('upload.hbs', { currentPage: 'currentPage' });
+	});
+});
+app.get('/filemenager', (req, res) => {
+	console.log(filesArr);
+	res.render('filemenager.hbs', {
+		files: filesArr,
+		delete: 'Usuń dane o plikach z tablicy',
+		currentPage: 'currentPage',
+	});
+});
+app.get('/deleteAll', (req, res) => {
+	filesArr = [];
+	res.render('filemenager.hbs', {
+		files: filesArr,
+		delete: 'Usuń dane o plikach z tablicy',
+		currentPage: 'currentPage',
+	});
+});
 
-            }
+function findFile(id) {
+	console.log(filesArr);
 
-            return arr
-        },
-        ///helper do dolarów ale pan odpuscił
-    }, defaultLayout: 'main.hbs'
-}));   // domyślny layout, potem można go zmienić
-app.use(express.static("static"))
-app.set('view engine', 'hbs');                           // określenie nazwy silnika szablonów
+	console.log(filesArr.filter((el) => el.id == id));
+	return filesArr.find((el) => el.id == id);
+}
 
+app.get('/show', (req, res) => {
+	const { id } = req.query;
 
+	let file = findFile(id);
+	console.log(file);
+	res
+		.header('Content-Type', file.type)
+		.sendFile(file.path.replaceAll('\\', '/'));
+});
 
-app.get("/", (req, res) => {
-    res.render("view.hbs", data)
-})
+let lastFile;
+app.get('/infoLast', (req, res) => {
+	if (lastFile) {
+		res.render('info.hbs', { file: lastFile, info: 'fileinfo' });
+	} else {
+		res.render('filemenager.hbs', {
+			files: filesArr,
+			delete: 'Usuń dane o plikach z tablicy',
+			currentPage: 'currentPage',
+		});
+	}
+});
 
-let items = []
-app.get("/filter", (req, res) => {
-    const { rating, category } = req.query
-    console.log(rating, category);
-    if (rating == undefined) {
-        res.render("view.hbs", data)
-    } else {
+app.get('/info', (req, res) => {
+	const { id } = req.query;
+	let file = findFile(id);
+	lastFile = findFile(id);
+	console.log(file);
+	res.render('info.hbs', { file, info: 'fileinfo' });
+});
 
-        items = []
-        data.items.map((el) => {
-            console.log(el.category);
-            if (el.stars == Number(rating) && (el.category == category || category == "all")) {
-                console.log({ rating: el.stars, title: el.title });
-                items.push({ rating: el.stars, title: el.title })
-            }
-        })
-        console.log(items);
-        res.render("view2.hbs", { items })
-    }
+app.get('/download', (req, res) => {
+	const { id } = req.query;
+	let file = findFile(id);
+	console.log(file);
+	res.header('Content-Type', file.type).download(file.path);
+});
+app.get('/delete', (req, res) => {
+	const { id } = req.query;
+	filesArr = filesArr.filter((el) => el.id != id);
 
-})
-app.get("/lista", (req, res) => {
-    res.render("view2.hbs", { items })
-})
-app.get("/tabela", (req, res) => {
-    res.render("view3.hbs", { items })
-})
+	res.render('filemenager.hbs', {
+		files: filesArr,
+		delete: 'Usuń dane o plikach z tablicy',
+		currentPage: 'currentPage',
+	});
+});
 
-app.listen(3000, () => { console.log("aaaaa") })
+app.listen(3000, () => {
+	console.log('good');
+});

@@ -1,0 +1,28 @@
+nav {
+	width: 100vw;
+	height: 80px;
+	background-color: darkblue;
+	display: flex;
+	align-items: center;
+	padding: 0px 20px;
+}
+
+.navEls {
+	all: unset;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.navEls > li {
+	all: unset;
+	margin-left: 20px;
+}
+
+.navEls > li > a {
+	all: unset;
+	color: white;
+	font-weight: 600;
+	border-bottom: 2px solid white;
+	font-family: 'Courier New', Courier, monospace;
+}
