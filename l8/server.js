@@ -39,16 +39,16 @@ app.post('/upload', (req, res) => {
 					file.type == 'image/png'
 						? '/img/png.png'
 						: file.type == 'image/jpeg'
-						? '/img/jpg.png'
-						: file.type == 'text/plain'
-						? '/img/txt.png'
-						: file.type == 'text/javascript'
-						? '/img/javascript.png'
-						: file.type == 'text/html'
-						? '/img/html.png'
-						: file.type == 'text/css'
-						? '/img/css.png'
-						: '/img/file.png';
+							? '/img/jpg.png'
+							: file.type == 'text/plain'
+								? '/img/txt.png'
+								: file.type == 'text/javascript'
+									? '/img/javascript.png'
+									: file.type == 'text/html'
+										? '/img/html.png'
+										: file.type == 'text/css'
+											? '/img/css.png'
+											: '/img/file.png';
 				let name = file.name;
 				let size = file.size;
 				let type = file.type;
@@ -68,16 +68,16 @@ app.post('/upload', (req, res) => {
 				file.type == 'image/png'
 					? '/img/png.png'
 					: file.type == 'image/jpeg'
-					? '/img/jpg.png'
-					: file.type == 'text/plain'
-					? '/img/txt.png'
-					: file.type == 'text/javascript'
-					? '/img/javascript.png'
-					: file.type == 'text/html'
-					? '/img/html.png'
-					: file.type == 'text/css'
-					? '/img/css.png'
-					: '/img/file.png';
+						? '/img/jpg.png'
+						: file.type == 'text/plain'
+							? '/img/txt.png'
+							: file.type == 'text/javascript'
+								? '/img/javascript.png'
+								: file.type == 'text/html'
+									? '/img/html.png'
+									: file.type == 'text/css'
+										? '/img/css.png'
+										: '/img/file.png';
 
 			let name = file.name;
 			let size = file.size;
