@@ -47,39 +47,73 @@ img {
 } */
 
 .filemenager {
-	width: 80vw;
-	height: min-content;
+    width: 80vw;
+    height: min-content;
 }
 
 .title {
-	height: 1px;
-	background-color: lightslategray;
-	width: 100%;
+    height: 1px;
+    background-color: lightslategray;
+    width: 100%;
 }
 
 .title > td {
-	color: white;
-	font-family: monospace;
-	font-weight: 400;
-	word-wrap: break-word;
-	margin: 0;
+    color: white;
+    font-family: monospace;
+    font-weight: 400;
+    word-wrap: break-word;
+    margin: 0;
 }
 
 .file {
-	padding: 0px 40px;
-	height: 60px;
-	width: 100%;
-	word-wrap: break-word;
+    padding: 0px 40px;
+    height: 60px;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .file > td {
-	color: darkslateblue;
-	font-family: monospace;
-	font-weight: 1000;
-	padding: 5px;
+    color: darkslateblue;
+    font-family: monospace;
+    font-weight: 1000;
+    padding: 5px;
 }
 
 img {
-	width: 50px;
-	height: 50px;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+.filemenager2 {
+    display: flex;
+    width: calc(100vw - 200px);
+    height: min-content;
+    flex-wrap: wrap;
+}
+.file2 {
+    display: flex;
+    flex-direction: column;
+
+    background-color: plum;
+    border-radius: 5px;
+    margin: 5px;
+    height: 100px;
+    max-width: 120px;
+}
+.file2 > div {
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.file2 > div > button {
+    all: unset;
+    padding: 2px;
+    border-radius: 3px;
+    border: black 1px solid;
+}
+.file2 > p {
+    text-overflow: ellipsis;
+    padding: 5px;
+    overflow: hidden;
 }

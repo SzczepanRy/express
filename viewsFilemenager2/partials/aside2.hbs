@@ -6,8 +6,9 @@
         <button onclick="dialog('newFileDialog','on')">add file</button>
 
         <div class='uploadForm2'>
-            <form enctype='multipart/form-data' method='POST' action='/upload'>
-                <input type='file' multiple accept='*' name='upload' />
+
+            <form enctype='multipart/form-data' method='POST' action='/upload2'>
+                <input type='file' multiple required accept='*' name='upload' />
                 <button class='sub' type='submit'>upload</button>
             </form>
 
@@ -16,22 +17,22 @@
 
                 <form method='GET' action='/addFolder'>
                     <input name='name' />
-                    <button type='submit'>upload</button>
+                    <button onclick="setTimeout(()=>{dialog('newFolderDialog','off')},100) " type='submit'>upload</button>
                 </form>
 
 
-                <button onclick="dialog('newFolderDialog','off')">cancel</button>
+                <button onclick="dialog('newFolderDialog','off')">close</button>
             </dialog>
             <dialog id="newFileDialog">
 
 
                 <form method='GET' action='/addFile'>
                     <input name='name' />
-                    <button type='submit'>upload</button>
+                    <button  onclick="setTimeout(()=>{dialog('newFolderDialog','off')},100)" type='submit'>upload</button>
                 </form>
 
 
-                <button onclick="dialog('newFileDialog','off')">cancel</button>
+                <button onclick="dialog('newFileDialog','off')">close</button>
             </dialog>
 </aside>
 <script>
@@ -42,6 +43,7 @@
             dialog.showModal();
         } else if (on == "off") {
             dialog.close()
+            window.location.reload()
         }
     }
 
