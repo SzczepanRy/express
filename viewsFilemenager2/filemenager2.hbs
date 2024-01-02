@@ -1,0 +1,28 @@
+<link rel='stylesheet' href='css/filemenager.css' />
+{{> aside2 }}
+
+
+<table class="filemenager2">
+
+
+
+	{{#each files}}
+
+	<div class="file2">
+		<img src="{{this.obraz}}" alt="http://localhost:3000{{this.obraz}}">
+		<p>{{this.name}}</p>
+	</div>
+
+	{{!-- <tr class='file'>
+		<td class='id'>{{this.id}}</td>
+		<td class='obraz'><img src="{{this.obraz}}" alt="http://localhost:3000{{this.obraz}}"></td>
+		<td style="max-width: 80px; word-wrap: break-word;" class='name'>{{this.name}}</td>
+		<td class='size'>{{this.size}}</td>
+		<td class='type'>{{this.type}}</td>
+		<td class='show'><a href="/show?id={{this.id}}">show</a></td>
+		<td class='info'><a href="/info?id={{this.id}}">info</a></td>
+		<td class='download'><a href="/download?id={{this.id}}">download</a></td>
+		<td class='delete'><a href="/delete?id={{this.id}}">delete</a></td>
+	</tr> --}}
+	{{/each}}
+</table>

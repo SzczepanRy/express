@@ -1,0 +1,48 @@
+<link rel='stylesheet' href='css/aside2.css' />
+<aside>
+
+    <div class="buttons">
+        <button onclick="dialog('newFolderDialog','on')">add folder</button>
+        <button onclick="dialog('newFileDialog','on')">add file</button>
+
+        <div class='uploadForm2'>
+            <form enctype='multipart/form-data' method='POST' action='/upload'>
+                <input type='file' multiple accept='*' name='upload' />
+                <button class='sub' type='submit'>upload</button>
+            </form>
+
+            <dialog id="newFolderDialog">
+
+
+                <form method='GET' action='/addFolder'>
+                    <input name='name' />
+                    <button type='submit'>upload</button>
+                </form>
+
+
+                <button onclick="dialog('newFolderDialog','off')">cancel</button>
+            </dialog>
+            <dialog id="newFileDialog">
+
+
+                <form method='GET' action='/addFile'>
+                    <input name='name' />
+                    <button type='submit'>upload</button>
+                </form>
+
+
+                <button onclick="dialog('newFileDialog','off')">cancel</button>
+            </dialog>
+</aside>
+<script>
+    function dialog(name, on) {
+        console.log("AAA")
+        const dialog = document.querySelector(`#${name}`)
+        if (on == "on") {
+            dialog.showModal();
+        } else if (on == "off") {
+            dialog.close()
+        }
+    }
+
+</script>
