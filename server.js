@@ -30,7 +30,9 @@ app.post("/upload", (req, res) => {
     form.multiples = true;
     form.uploadDir = __dirname + "/upload/"; // folder do zapisu zdjęcia
     form.keepExtensions = true;
-    form.originalFilename = true;
+    form.on("fileBegin", function (name, file) {
+        file.path = form.uploadDir + "/" + file.name;
+    });
     form.parse(req, function (err, fields, files) {
         if (files.upload.length > 0) {
             [...files.upload].forEach((file) => {
@@ -101,6 +103,7 @@ app.get("/filemenager", (req, res) => {
 
 app.get("/filemenager2", (req, res) => {
     let filenames = fs.readdirSync(path.join(__dirname, `/upload/`));
+    console.log(filenames);
     let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
     let fileList = [];
     filenames.map((el) => {
@@ -121,7 +124,7 @@ app.get("/filemenager2", (req, res) => {
             });
         }
     });
-
+    console.log(fileList);
     res.render("filemenager2.hbs", {
         files: fileList,
         delete: "Usuń dane o plikach z tablicy",
@@ -228,8 +231,58 @@ app.get("/addFile", (req, res) => {
     }
 });
 
-app.get("/delete2", (req, res) => {
-    const { name } = req.query;
+app.post("/upload2", (req, res) => {
+    let form = formidable({});
+    form.multiples = true;
+    form.uploadDir = __dirname + "/upload/"; // folder do zapisu zdjęcia
+    form.keepExtensions = true;
+
+    form.on("fileBegin", function (name, file) {
+        if (!fs.existsSync(path.join(__dirname, `/upload/${file.name}`))) {
+            file.path = form.uploadDir + "/" + file.name;
+        } else {
+            file.path =
+                form.uploadDir +
+                "/" +
+                [file.name.split(".")[0], Date.now(), ".", file.name.split(".")[file.name.split(".").length - 1]].join(
+                    ""
+                );
+        }
+    });
+
+    form.parse(req, function (err, fields, files) {
+        let fileList = [];
+        let filenames = fs.readdirSync(path.join(__dirname, `/upload/`));
+        let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
+
+        filenames.map((el) => {
+            let arr = el.split(".");
+            if (
+                fs.existsSync(path.join(__dirname, `/upload/${el}`)) &&
+                fs.lstatSync(path.join(__dirname, `/upload/${el}`)).isDirectory()
+            ) {
+                arr.push("folder");
+                fileList.unshift({
+                    name: el,
+                    obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
+                });
+            } else {
+                fileList.push({
+                    name: el,
+                    obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
+                });
+            }
+        });
+        console.log(fileList);
+        res.render("filemenager2.hbs", {
+            files: fileList,
+            delete: "Usuń dane o plikach z tablicy",
+            currentPage: "currentPage",
+        });
+    });
+});
+app.post("/delete2", (req, res) => {
+    const { name } = req.body;
 
     if (name && fs.existsSync(path.join(__dirname, `/upload/${name}`))) {
         fs.unlink(path.join(__dirname, `/upload/${name}`), (err) => {
@@ -239,44 +292,10 @@ app.get("/delete2", (req, res) => {
                 });
             }
         });
+        res.json({ message: "deleted file" });
+    } else {
+        res.json({ message: "not deleted" });
     }
-    res.json({ message: "ok" });
-});
-
-app.post("/upload2", (req, res) => {
-    let form = formidable({});
-    form.multiples = true;
-    form.uploadDir = __dirname + "/upload/"; // folder do zapisu zdjęcia
-    form.keepExtensions = true;
-    form.originalFilename = true;
-
-    let filenames = fs.readdirSync(path.join(__dirname, `/upload/`));
-    let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
-    let fileList = [];
-    filenames.map((el) => {
-        let arr = el.split(".");
-        if (
-            fs.existsSync(path.join(__dirname, `/upload/${el}`)) &&
-            fs.lstatSync(path.join(__dirname, `/upload/${el}`)).isDirectory()
-        ) {
-            arr.push("folder");
-            fileList.unshift({
-                name: el,
-                obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
-            });
-        } else {
-            fileList.push({
-                name: el,
-                obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
-            });
-        }
-    });
-
-    res.render("filemenager2.hbs", {
-        files: fileList,
-        delete: "Usuń dane o plikach z tablicy",
-        currentPage: "currentPage",
-    });
 });
 
 app.listen(3000, () => {

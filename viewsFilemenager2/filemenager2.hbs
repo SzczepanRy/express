@@ -23,14 +23,18 @@
 </div>
 
 <script>
+	
 	async function deleteFile(name){
-		console.log(name)
-		let res = await fetch("http://localhost:3000/delete2?name="+name,{
-			method:'GET',
-			options:{
+		
+		await fetch("http://localhost:3000/delete2",{
+			method:'POST',
+			headers:{
 				"Content-type":"application/json"
-			}
+			},
+			body:JSON.stringify({name})
 		})
-		window.location.reload()
+		
+	   	window.location.reload()
 	}
+	
 </script>

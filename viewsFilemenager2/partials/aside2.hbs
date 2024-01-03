@@ -36,6 +36,9 @@
             </dialog>
 </aside>
 <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, "/filemenager2" );
+    }
     function dialog(name, on) {
         console.log("AAA")
         const dialog = document.querySelector(`#${name}`)
