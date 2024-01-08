@@ -89,6 +89,21 @@ img {
     width: calc(100vw - 200px);
     height: min-content;
     flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.folders {
+    display: flex;
+    flex-direction: row;
+    width: calc(100vw - 300px);
+    flex-wrap: wrap;
+}
+
+.files2 {
+    display: flex;
+    flex-direction: row;
+    width: calc(100vw - 300px);
+    flex-wrap: wrap;
 }
 .file2 {
     display: flex;

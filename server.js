@@ -13,7 +13,16 @@ app.engine(
         defaultLayout: "main.hbs",
         extname: ".hbs",
         partialsDir: "viewsFilemenager2/partials",
-        helpers: {},
+        helpers: {
+            checkFolder(name) {
+                console.log(name);
+                if (name == "/img/folder.png") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+        },
     })
 );
 app.use(express.static(path.join(__dirname, "/viewsFilemenager2")));
@@ -205,12 +214,13 @@ app.get("/addFolder", (req, res) => {
             if (err) throw err;
             console.log("jest");
         });
-    } else {
-        fs.mkdir(path.join(__dirname, `/upload/${name + Date.now()}`), (err) => {
-            if (err) throw err;
-            console.log("jest");
-        });
     }
+    //  else {
+    //     fs.mkdir(path.join(__dirname, `/upload/${name + Date.now()}`), (err) => {
+    //         if (err) throw err;
+    //         console.log("jest");
+    //     });
+    // }
 });
 app.get("/addFile", (req, res) => {
     const { name } = req.query;
@@ -219,12 +229,12 @@ app.get("/addFile", (req, res) => {
     }
 
     if (!fs.existsSync(path.join(__dirname, `/upload/${name}`))) {
-        fs.writeFile(path.join(__dirname, `/upload/${name}`), "text", (err) => {
+        fs.writeFile(path.join(__dirname, `/upload/${name}`), "created at " + Date.now(), (err) => {
             if (err) throw err;
             console.log("jest");
         });
     } else {
-        fs.writeFile(path.join(__dirname, `/upload/${name + Date.now()}`), "text", (err) => {
+        fs.writeFile(path.join(__dirname, `/upload/${name + Date.now()}`), "created at " + Date.now(), (err) => {
             if (err) throw err;
             console.log("jest");
         });

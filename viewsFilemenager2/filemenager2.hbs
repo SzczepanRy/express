@@ -5,21 +5,44 @@
 <div class="filemenager2">
 
 
+	<div class="folders">
 
-	{{#each files}}
+		{{#each files}}
+		{{#if (checkFolder this.obraz) }}
 
-	<div class="file2">
-		<div class="">
-		<img src="{{this.obraz}}" alt="http://localhost:3000{{this.obraz}}">
-		<button onclick="deleteFile('{{this.name}}')" >x</button>
-
-		</div>
+		<div class="file2">
+			<div class="">
+			<img src="{{this.obraz}}" alt="{{this.obraz}}">
+			<button onclick="deleteFile('{{this.name}}')" >x</button>
 				
-		<p>{{this.name}}</p>
+			</div>
+					
+			<p>{{this.name}}</p>
+		</div>
+		{{/if}}
+		{{/each}}
 	</div>
 
+	<div class="files2">
 
-	{{/each}}
+		{{#each files}}
+		{{#if (checkFolder this.obraz) }}
+		{{else}}
+		<div class="file2">
+			<div class="">
+			<img src="{{this.obraz}}" alt="{{this.obraz}}">
+			<button onclick="deleteFile('{{this.name}}')" >x</button>
+			
+			</div>
+					
+			<p>{{this.name}}</p>
+		</div>
+		{{/if}}
+		
+		{{/each}}
+	</div>
+
+	
 </div>
 
 <script>
