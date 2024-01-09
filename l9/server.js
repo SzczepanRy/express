@@ -6,13 +6,13 @@ const formidable = require("formidable");
 const fs = require("fs");
 const { log } = require("console");
 app.use(express.json());
-app.set("views", path.join(__dirname, "viewsFilemenager3")); // ustalamy katalog views
+app.set("views", path.join(__dirname, "viewsFilemenager2")); // ustalamy katalog views
 app.engine(
 	"hbs",
 	hbs({
 		defaultLayout: "main.hbs",
 		extname: ".hbs",
-		partialsDir: "viewsFilemenager3/partials",
+		partialsDir: "viewsFilemenager2/partials",
 		helpers: {
 			checkFolder(name) {
 				console.log(name);
@@ -22,27 +22,10 @@ app.engine(
 					return false;
 				}
 			},
-			splitPath(path) {
-				let arr = path.split("/")
-				console.log(arr);
-				arr.filter((el) => {
-					if (el != "") {
-						console.log(el);
-						return el
-					}
-				})
-				let target = []
-				let temp = ""
-				for (el of arr) {
-					temp = temp + "/" + el
-					target.push(temp)
-				}
-				return target
-			}
 		},
 	})
 );
-app.use(express.static(path.join(__dirname, "/viewsFilemenager3")));
+app.use(express.static(path.join(__dirname, "/viewsFilemenager2")));
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
@@ -51,7 +34,7 @@ app.get("/", (req, res) => {
 
 let filesArr = [];
 
-let currentPath = ''
+let currentPath = '/'
 
 app.post("/upload", (req, res) => {
 	let form = formidable({});
@@ -112,7 +95,7 @@ app.post("/upload", (req, res) => {
 			let path = file.path;
 			let savedate = Date.now();
 			let obj = { id, obraz, name, size, type, path, savedate };
-
+			console.log(obj);
 			filesArr.push(obj);
 		}
 
@@ -121,7 +104,7 @@ app.post("/upload", (req, res) => {
 });
 
 app.get("/filemenager", (req, res) => {
-
+	console.log(filesArr);
 	res.render("filemenager.hbs", {
 		files: filesArr,
 		delete: "Usuń dane o plikach z tablicy",
@@ -131,14 +114,14 @@ app.get("/filemenager", (req, res) => {
 
 app.get("/filemenager2", (req, res) => {
 	let filenames = fs.readdirSync(path.join(__dirname, `/upload/`));
-
+	console.log(filenames);
 	let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
 	let fileList = [];
 	filenames.map((el) => {
 		let arr = el.split(".");
 		if (
-			fs.existsSync(path.join(__dirname, `/upload${currentPath}/${el}`)) &&
-			fs.lstatSync(path.join(__dirname, `/upload${currentPath}/${el}`)).isDirectory()
+			fs.existsSync(path.join(__dirname, `/upload/${el}`)) &&
+			fs.lstatSync(path.join(__dirname, `/upload/${el}`)).isDirectory()
 		) {
 			arr.push("folder");
 			fileList.unshift({
@@ -152,7 +135,7 @@ app.get("/filemenager2", (req, res) => {
 			});
 		}
 	});
-
+	console.log(fileList);
 	res.render("filemenager2.hbs", {
 		currentPath: currentPath,
 		files: fileList,
@@ -171,9 +154,9 @@ app.get("/deleteAll", (req, res) => {
 });
 
 function findFile(id) {
+	console.log(filesArr);
 
-
-
+	console.log(filesArr.filter((el) => el.id == id));
 	return filesArr.find((el) => el.id == id);
 }
 
@@ -181,7 +164,7 @@ app.get("/show", (req, res) => {
 	const { id } = req.query;
 
 	let file = findFile(id);
-
+	console.log(file);
 	res.header("Content-Type", file.type).sendFile(file.path.replaceAll("\\", "/"));
 });
 
@@ -229,13 +212,18 @@ app.get("/addFolder", (req, res) => {
 		res.json({ message: "not a valid name" });
 	}
 
-	if (!fs.existsSync(path.join(__dirname, `/upload${currentPath}/${name}`))) {
-		fs.mkdir(path.join(__dirname, `/upload${currentPath}/${name}`), (err) => {
+	if (!fs.existsSync(path.join(__dirname, `/upload/${name}`))) {
+		fs.mkdir(path.join(__dirname, `/upload/${name}`), (err) => {
 			if (err) throw err;
 			console.log("jest");
 		});
 	}
-
+	//  else {
+	//     fs.mkdir(path.join(__dirname, `/upload/${name + Date.now()}`), (err) => {
+	//         if (err) throw err;
+	//         console.log("jest");
+	//     });
+	// }
 });
 app.get("/addFile", (req, res) => {
 	const { name } = req.query;
@@ -323,48 +311,6 @@ app.post("/delete2", (req, res) => {
 		res.json({ message: "not deleted" });
 	}
 });
-
-
-app.get("/changePath", (req, res) => {
-	let { newPath } = req.query
-
-	// console.log(currentpath + "aaaa" + newPath);
-	currentPath = currentPath + newPath
-
-	console.log(currentPath);
-	let filenames = fs.readdirSync(path.join(__dirname, `/upload${currentPath}/`));
-	console.log(filenames);
-	let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
-	let fileList = [];
-	filenames.map((el) => {
-		let arr = el.split(".");
-		if (
-			fs.existsSync(path.join(__dirname, `/upload${currentPath}/${el}`)) &&
-			fs.lstatSync(path.join(__dirname, `/upload${currentPath}/${el}`)).isDirectory()
-		) {
-			arr.push("folder");
-			fileList.unshift({
-				name: el,
-				obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
-			});
-		} else {
-			fileList.push({
-				name: el,
-				obraz: types.includes(arr[arr.length - 1]) ? `/img/${arr[arr.length - 1]}.png` : "/img/file.png",
-			});
-		}
-	});
-	console.log(fileList);
-	res.render("filemenager2.hbs", {
-		currentPath: currentPath,
-		files: fileList,
-		delete: "Usuń dane o plikach z tablicy",
-		currentPage: "currentPage",
-	});
-
-})
-
-
 
 app.listen(3000, () => {
 	console.log("good");

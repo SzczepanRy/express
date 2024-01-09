@@ -1,0 +1,42 @@
+aside {
+	width: 300px;
+	height: 100%;
+	background-color: lightgray;
+}
+
+aside>div {
+	padding: 10px;
+	height: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: gray;
+	font-weight: 400;
+	flex-wrap: wrap;
+	text-align: center;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+aside>div:hover {
+	cursor: pointer;
+}
+
+aside>.currentPage:hover {
+	cursor: default;
+}
+
+aside>.info {
+	cursor: default;
+}
+
+dialog {
+
+	left: 50%;
+	top: 50%;
+}
+
+.uploadForm2>form {
+	display: flex;
+	flex-direction: column;
+}
