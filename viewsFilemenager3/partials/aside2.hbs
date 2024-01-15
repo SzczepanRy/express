@@ -4,7 +4,10 @@
     <div class="buttons">
         <button onclick="dialog('newFolderDialog','on')">add folder</button>
         <button onclick="dialog('newFileDialog','on')">add file</button>
-
+        {{#if (checkIfHome currentPath )}}
+        <button onclick="dialog('renameFolderDialog','on')">rename</button>
+        {{/if}}
+    <p>{{currentPath}}</p>
         <div class='uploadForm2'>
 
             <form enctype='multipart/form-data' method='POST' action='/upload2'>
@@ -34,6 +37,19 @@
 
                 <button onclick="dialog('newFileDialog','off')">close</button>
             </dialog>
+         
+            <dialog id="renameFolderDialog">
+
+
+                <form method='GET' action='/renamePath'>
+                    <input name='newDir' />
+                    <button  onclick="setTimeout(()=>{dialog('renameFolderDialog','off')},100)" type='submit'>upload</button>
+                </form>
+
+
+                <button onclick="dialog('renameFolderDialog','off')">close</button>
+            </dialog>
+    
 </aside>
 <script>
     if ( window.history.replaceState ) {

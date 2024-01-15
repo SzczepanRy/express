@@ -24,8 +24,8 @@
 				<button onclick="deleteFile('{{this.name}}')">x</button>
 
 			</div>
-
-			<a href="http://localhost:3000/changePath?newPath=/{{this.name}}">{{this.name}}</a>
+			<p>{{currentPath}}</p>
+			<a href="http://localhost:3000/changePath?newPath={{currentPath}}/{{this.name}}">{{this.name}}</a>
 		</div>
 		{{/if}}
 		{{/each}}
