@@ -7,7 +7,7 @@ const fs = require("fs");
 const { log } = require("console");
 const fse = require('fs-extra')
 app.use(express.json());
-app.set("views", path.join(__dirname, "viewsFilemenager4")); // ustalamy katalog views
+app.set("views", path.join(__dirname, "viewsFilemenager3")); // ustalamy katalog views
 app.engine(
     "hbs",
     hbs({
@@ -51,7 +51,7 @@ app.engine(
         },
     })
 );
-app.use(express.static(path.join(__dirname, "/viewsFilemenager4")));
+app.use(express.static(path.join(__dirname, "/viewsFilemenager3")));
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
@@ -409,29 +409,19 @@ app.get("/renamePath", (req, res) => {
     if (!fs.existsSync(path.join(__dirname, `${newPath}`))) {
         fse.copySync(path.join(__dirname, `${currentPath}`), path.join(__dirname, `${newPath}`))
         fs.rmdirSync(path.join(__dirname, `${currentPath}`), { recursive: true });
-
+        //fs.rename(path.join(__dirname, `${currentPath}`), path.join(__dirname, `${newPath}`), (err) => {
+        //    if (err) console.log(err);
+        //   else {
         currentPath = newPath;
-        res.redirect("/filemenager2");
 
+        log
+        res.redirect("/filemenager2");
+        //   }
+        //  });
     } else {
         res.json({ message: "fail" });
     }
-
 });
-
-app.get("/showFile", (req, res) => {
-    const { name } = req.query
-    let data = "errorr reading a file"
-    data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), 'utf8')
-
-    res.render("showFile.hbs", {
-        currentPath: currentPath,
-        data: data,
-        name: name
-    });
-
-})
-
 
 app.listen(3000, () => {
     console.log("good");
