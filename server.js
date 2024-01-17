@@ -5,7 +5,7 @@ const path = require("path");
 const formidable = require("formidable");
 const fs = require("fs");
 const { log } = require("console");
-const fse = require('fs-extra')
+const fse = require("fs-extra");
 app.use(express.json());
 app.set("views", path.join(__dirname, "viewsFilemenager4")); // ustalamy katalog views
 app.engine(
@@ -13,7 +13,7 @@ app.engine(
     hbs({
         defaultLayout: "main.hbs",
         extname: ".hbs",
-        partialsDir: "viewsFilemenager3/partials",
+        partialsDir: "viewsFilemenager4/partials",
         helpers: {
             checkFolder(name) {
                 //  console.log(name);
@@ -78,16 +78,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                            ? "/img/jpg.png"
-                            : file.type == "text/plain"
-                                ? "/img/txt.png"
-                                : file.type == "text/javascript"
-                                    ? "/img/javascript.png"
-                                    : file.type == "text/html"
-                                        ? "/img/html.png"
-                                        : file.type == "text/css"
-                                            ? "/img/css.png"
-                                            : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                        ? "/img/txt.png"
+                        : file.type == "text/javascript"
+                        ? "/img/javascript.png"
+                        : file.type == "text/html"
+                        ? "/img/html.png"
+                        : file.type == "text/css"
+                        ? "/img/css.png"
+                        : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -104,16 +104,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                            ? "/img/txt.png"
-                            : file.type == "text/javascript"
-                                ? "/img/javascript.png"
-                                : file.type == "text/html"
-                                    ? "/img/html.png"
-                                    : file.type == "text/css"
-                                        ? "/img/css.png"
-                                        : "/img/file.png";
+                    ? "/img/jpg.png"
+                    : file.type == "text/plain"
+                    ? "/img/txt.png"
+                    : file.type == "text/javascript"
+                    ? "/img/javascript.png"
+                    : file.type == "text/html"
+                    ? "/img/html.png"
+                    : file.type == "text/css"
+                    ? "/img/css.png"
+                    : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -407,31 +407,27 @@ app.get("/renamePath", (req, res) => {
     newPath = `${newPath}/${newDir}`;
 
     if (!fs.existsSync(path.join(__dirname, `${newPath}`))) {
-        fse.copySync(path.join(__dirname, `${currentPath}`), path.join(__dirname, `${newPath}`))
+        fse.copySync(path.join(__dirname, `${currentPath}`), path.join(__dirname, `${newPath}`));
         fs.rmdirSync(path.join(__dirname, `${currentPath}`), { recursive: true });
 
         currentPath = newPath;
         res.redirect("/filemenager2");
-
     } else {
         res.json({ message: "fail" });
     }
-
 });
 
 app.get("/showFile", (req, res) => {
-    const { name } = req.query
-    let data = "errorr reading a file"
-    data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), 'utf8')
+    const { name } = req.query;
+    let data = "errorr reading a file";
+    data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
 
     res.render("showFile.hbs", {
         currentPath: currentPath,
         data: data,
-        name: name
+        name: name,
     });
-
-})
-
+});
 
 app.listen(3000, () => {
     console.log("good");
