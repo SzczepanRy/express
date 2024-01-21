@@ -6,7 +6,7 @@ aside {
 
 aside > div {
     padding: 10px;
-    height: 60px;
+    /* height: 60px; */
     width: 100%;
     display: flex;
     align-items: center;
@@ -16,6 +16,13 @@ aside > div {
     flex-wrap: wrap;
     text-align: center;
     font-family: "Courier New", Courier, monospace;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 aside > div:hover {

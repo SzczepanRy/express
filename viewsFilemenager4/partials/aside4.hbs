@@ -4,10 +4,29 @@
     <div class="buttons">
         <div class="visual">
             <button class="less">-</button>
-            <buttom class="colors">kolory</buttom>
+            <button class="colors">kolory</button>
             <button class="more">+</button>
         </div>
 
+        <button class="saveSytles">zapisz ustawienia</button>
+        <button class="change" onclick="dialog('reamePathDialog','on')">zmaina nazwy</button>
+        <button class="view">podgląd pliku</button>
+
+        <div class="save">
+            <button class="savefile">zapisz plik</button>
+        </div>
+
+        <dialog id="reamePathDialog">
+
+            {{! on submit if desnt work }}
+            <form method="GET" id="reamePathForm" action="/renameFile">
+                <input name="newName" />
+                <input type="hidden" name="oldName" value="{{name}}" />
+                <button type="submit">upload</button>
+            </form>
+
+            <button class="cancel" onclick="">close</button>
+        </dialog>
     </div>
 </aside>
 <script>

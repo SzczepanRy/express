@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: gray;
 }
 
 .showFileBody {
@@ -24,6 +25,8 @@
 .text {
     width: calc(100vw - 350px);
     height: 100%;
+    overflow-x: hidden;
+    text-wrap: nowrap;
 }
 
 .lines {

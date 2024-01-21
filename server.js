@@ -6,6 +6,7 @@ const formidable = require("formidable");
 const fs = require("fs");
 const { log } = require("console");
 const fse = require("fs-extra");
+
 app.use(express.json());
 app.set("views", path.join(__dirname, "viewsFilemenager4")); // ustalamy katalog views
 app.engine(
@@ -61,6 +62,11 @@ app.get("/", (req, res) => {
 let filesArr = [];
 
 let currentPath = "/upload";
+
+let styles = {
+    color: "white",
+    size: 14,
+};
 
 app.post("/upload", (req, res) => {
     let form = formidable({});
@@ -417,16 +423,65 @@ app.get("/renamePath", (req, res) => {
     }
 });
 
+app.get("/renameFile", (req, res) => {
+    const { newName, oldName } = req.query;
+    console.log(currentPath);
+
+    fs.rename(
+        path.join(__dirname, `${currentPath}/${oldName}`),
+        path.join(__dirname, `${currentPath}/${newName}`),
+        (err) => {
+            if (err) console.log(err);
+            console.log("ok reanmed ");
+            res.redirect("/filemenager2");
+        }
+    );
+});
+
+app.post("/saveValue", (req, res) => {
+    const { textAreaValue, fileName } = req.body;
+
+    fs.writeFile(path.join(__dirname, `${currentPath}/${fileName}`), textAreaValue, (err) => {
+        if (err) throw err;
+        console.log("plik zapisany");
+        res.sendStatus(200);
+    });
+});
+
 app.get("/showFile", (req, res) => {
     const { name } = req.query;
     let data = "errorr reading a file";
     data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
 
     res.render("showFile.hbs", {
-        currentPath: currentPath,
-        data: data,
-        name: name,
+        currentPath,
+        data,
+        name,
+        size: styles.size,
+        color: styles.color,
     });
+});
+
+app.get("/viewfile", (req, res) => {
+    const { name } = req.query;
+    console.log(name);
+    let data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
+    res.send("<a href='http://localhost:3000/filemenager2'>home</a> <pre>\n" + data + "\n</pre>");
+});
+
+app.get("/getStyles", (req, res) => {
+    res.json({ styles });
+});
+
+app.post("/saveStyles", (req, res) => {
+    const { color, size } = req.body;
+
+    styles = {
+        color,
+        size,
+    };
+    console.log(styles);
+    res.sendStatus(200);
 });
 
 app.listen(3000, () => {

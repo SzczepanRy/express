@@ -5,30 +5,9 @@
     <header class="showFileHeader">/{{name}}</header>
     <div class="showFileBody">
         <textarea class="lines"></textarea>
-        <textarea class="text">{{data}}</textarea>
+        <textarea class="text" >{{data}}</textarea>
 
     </div>
 </div>
 
-<script>
-    
-    let fontsize = 14
-
-    let linesEl = document.querySelector(".lines")
-    let textarea = document.querySelector(".text")
-
-    function renderLines() {
-        textarea.style.fontSize = `${fontsize}px`
-        linesEl.style.fontSize = `${fontsize}px`
-        let lines = textarea.value.split("\n")
-        linesEl.value=""
-        lines.map((el,i)=>{
-
-            linesEl.value += `${i}\n`
-        })
-        
-
-    }
-    textarea.addEventListener("keyup",renderLines)
-    window.addEventListener("load",renderLines)
-</script>
+<script src="./js/showFile.js"></script> 
