@@ -253,8 +253,20 @@ app.get("/addFile", (req, res) => {
         res.json({ message: "not a valid name" });
     }
 
+    let extention = name.split(".")[name.split(".").length - 1];
+
+    // let types = ["css", "html", "txt", "js", "png", "jpg"];
+
+    let templates = {
+        js: "console.log('hello world')",
+        html: "<h1>hello world</h1>",
+        css: `.body{
+            background-color:'black';
+            }`,
+    };
+
     if (!fs.existsSync(path.join(__dirname, `${currentPath}/${name}`))) {
-        fs.writeFile(path.join(__dirname, `${currentPath}/${name}`), "created at " + Date.now(), (err) => {
+        fs.writeFile(path.join(__dirname, `${currentPath}/${name}`), templates[extention], (err) => {
             if (err) throw err;
             console.log("jest");
         });
