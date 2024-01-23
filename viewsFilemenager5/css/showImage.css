@@ -1,0 +1,10 @@
+.showImage {
+
+    width: calc(100vw - 300px);
+    height: calc(100vh - 80px);
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}

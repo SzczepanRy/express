@@ -8,13 +8,13 @@ const { log } = require("console");
 const fse = require("fs-extra");
 
 app.use(express.json());
-app.set("views", path.join(__dirname, "viewsFilemenager5")); // ustalamy katalog views
+app.set("views", path.join(__dirname, "viewsFilemenager4")); // ustalamy katalog views
 app.engine(
     "hbs",
     hbs({
         defaultLayout: "main.hbs",
         extname: ".hbs",
-        partialsDir: "viewsFilemenager5/partials",
+        partialsDir: "viewsFilemenager4/partials",
         helpers: {
             checkIfImg(name) {
                 console.log(name);
@@ -59,7 +59,7 @@ app.engine(
         },
     })
 );
-app.use(express.static(path.join(__dirname, "/viewsFilemenager5")));
+app.use(express.static(path.join(__dirname, "/viewsFilemenager4")));
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
@@ -74,12 +74,6 @@ let styles = {
     color: "white",
     size: 14,
 };
-
-const effects = [
-    { name: "grayscale" },
-    { name: "invert" },
-    { name: "sepia" }
-]
 
 app.post("/upload", (req, res) => {
     let form = formidable({});
@@ -266,9 +260,8 @@ app.get("/addFile", (req, res) => {
         res.json({ message: "not a valid name" });
     }
 
-    let possible = ['js', "html", "css"]
     let extention
-    if (name.includes(".") && (possible.includes(name.split(".")[name.split(".").length - 1]))) {
+    if (name.includes(".")) {
         extention = name.split(".")[name.split(".").length - 1];
     } else {
         extention = "all"
@@ -492,18 +485,6 @@ app.get("/showFile", (req, res) => {
         name,
         size: styles.size,
         color: styles.color,
-    });
-});
-app.get("/showImage", (req, res) => {
-    const { name } = req.query;
-    let data = "errorr reading a img";
-    // data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
-
-    res.render("showImage.hbs", {
-        currentPath,
-        data,
-        name,
-        effects
     });
 });
 

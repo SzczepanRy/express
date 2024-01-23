@@ -1,0 +1,19 @@
+<link rel='stylesheet' href='css/imageAside.css' />
+<aside>
+
+    <div class="buttons">
+        <button class="filters">filters</button>
+    </div>
+
+</aside>
+
+<div class="popup">
+    {{#each effects }}
+
+    {{!-- <div style="background-image:url('{{image_path}}');filter:{{name}}(100%)"> --}}
+        <div class="image">{{name}}</div>
+        {{!--
+    </div> --}}
+
+    {{/each}}
+</div>

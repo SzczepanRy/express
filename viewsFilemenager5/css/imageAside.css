@@ -1,0 +1,46 @@
+aside {
+    width: 100px;
+    height: 100%;
+    background-color: lightgray;
+}
+
+aside>div {
+    padding: 10px;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    font-weight: 400;
+    flex-wrap: wrap;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+aside>div:hover {
+    cursor: pointer;
+}
+
+.popup {
+    height: calc(100vh - 80px);
+    width: 0px;
+    transition: width 1s;
+    z-index: -1000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    flex-direction: column;
+
+
+    background-color: plum;
+}
+
+.image {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
