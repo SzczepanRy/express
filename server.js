@@ -19,9 +19,9 @@ app.engine(
             checkIfImg(name) {
                 console.log(name);
                 if (name.toLowerCase().includes(".png") || name.toLowerCase().includes(".jpg")) {
-                    return true
+                    return true;
                 }
-                return false
+                return false;
             },
             checkFolder(name) {
                 //  console.log(name);
@@ -75,11 +75,7 @@ let styles = {
     size: 14,
 };
 
-const effects = [
-    { name: "grayscale" },
-    { name: "invert" },
-    { name: "sepia" }
-]
+const effects = [{ name: "grayscale" }, { name: "invert" }, { name: "sepia" }];
 
 app.post("/upload", (req, res) => {
     let form = formidable({});
@@ -97,16 +93,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                            ? "/img/jpg.png"
-                            : file.type == "text/plain"
-                                ? "/img/txt.png"
-                                : file.type == "text/javascript"
-                                    ? "/img/javascript.png"
-                                    : file.type == "text/html"
-                                        ? "/img/html.png"
-                                        : file.type == "text/css"
-                                            ? "/img/css.png"
-                                            : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                        ? "/img/txt.png"
+                        : file.type == "text/javascript"
+                        ? "/img/javascript.png"
+                        : file.type == "text/html"
+                        ? "/img/html.png"
+                        : file.type == "text/css"
+                        ? "/img/css.png"
+                        : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -123,16 +119,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                            ? "/img/txt.png"
-                            : file.type == "text/javascript"
-                                ? "/img/javascript.png"
-                                : file.type == "text/html"
-                                    ? "/img/html.png"
-                                    : file.type == "text/css"
-                                        ? "/img/css.png"
-                                        : "/img/file.png";
+                    ? "/img/jpg.png"
+                    : file.type == "text/plain"
+                    ? "/img/txt.png"
+                    : file.type == "text/javascript"
+                    ? "/img/javascript.png"
+                    : file.type == "text/html"
+                    ? "/img/html.png"
+                    : file.type == "text/css"
+                    ? "/img/css.png"
+                    : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -266,12 +262,12 @@ app.get("/addFile", (req, res) => {
         res.json({ message: "not a valid name" });
     }
 
-    let possible = ['js', "html", "css"]
-    let extention
-    if (name.includes(".") && (possible.includes(name.split(".")[name.split(".").length - 1]))) {
+    let possible = ["js", "html", "css"];
+    let extention;
+    if (name.includes(".") && possible.includes(name.split(".")[name.split(".").length - 1])) {
         extention = name.split(".")[name.split(".").length - 1];
     } else {
-        extention = "all"
+        extention = "all";
     }
 
     // let types = ["css", "html", "txt", "js", "png", "jpg"];
@@ -283,7 +279,7 @@ app.get("/addFile", (req, res) => {
             .body{
                 background-color:'black';
             }`,
-        all: "hello world"
+        all: "hello world",
     };
 
     if (!fs.existsSync(path.join(__dirname, `${currentPath}/${name}`))) {
@@ -494,16 +490,20 @@ app.get("/showFile", (req, res) => {
         color: styles.color,
     });
 });
+app.use("/upload", express.static("upload"));
 app.get("/showImage", (req, res) => {
     const { name } = req.query;
     let data = "errorr reading a img";
+
     // data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
 
     res.render("showImage.hbs", {
         currentPath,
         data,
         name,
-        effects
+        effects,
+        imagePath: `${currentPath}/${name}`,
+        nav: `${currentPath}/${name}`,
     });
 });
 

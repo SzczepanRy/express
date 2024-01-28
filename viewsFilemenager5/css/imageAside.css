@@ -4,7 +4,7 @@ aside {
     background-color: lightgray;
 }
 
-aside>div {
+aside > div {
     padding: 10px;
     height: 60px;
     width: 100%;
@@ -15,10 +15,10 @@ aside>div {
     font-weight: 400;
     flex-wrap: wrap;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
-aside>div:hover {
+aside > div:hover {
     cursor: pointer;
 }
 
@@ -26,21 +26,27 @@ aside>div:hover {
     height: calc(100vh - 80px);
     width: 0px;
     transition: width 1s;
-    z-index: -1000;
+    z-index: 1;
     overflow: hidden;
     display: flex;
     align-items: center;
 
     flex-direction: column;
 
-
     background-color: plum;
+}
+.el {
+    z-index: 123;
 }
 
 .image {
     padding: 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-
+    /* align-items: center;
+    justify-content: center; */
+    z-index: 10;
+    width: 60px;
+    height: 40px;
+    background-size: 60px 40px;
+    background-repeat: no-repeat;
 }

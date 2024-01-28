@@ -1,4 +1,4 @@
-<link rel='stylesheet' href='css/imageAside.css' />
+<link rel="stylesheet" href="css/imageAside.css" />
 <aside>
 
     <div class="buttons">
@@ -8,12 +8,12 @@
 </aside>
 
 <div class="popup">
-    {{#each effects }}
-
-    {{!-- <div style="background-image:url('{{image_path}}');filter:{{name}}(100%)"> --}}
-        <div class="image">{{name}}</div>
-        {{!--
-    </div> --}}
-
-    {{/each}}
+ 
+    {{#each effects}}
+        <div class="el" id="{{name}}">
+            <p>{{name}}</p>
+            <div class="image" style="background-image: url('{{../imagePath}}'); filter:{{name}}(100%);"></div>
+    
+        </div>
+     {{/each}}
 </div>
