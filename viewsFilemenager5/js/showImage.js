@@ -38,3 +38,51 @@ Array.from(arrAll).forEach((el) => {
         genImage(filter);
     });
 });
+
+
+
+const renameButton = document.querySelector(".rename")
+renameButton.addEventListener("click", (e) => {
+
+    const path = e.currentTarget.id
+    console.log(path);
+
+    dialog("renameImageDialog", "on")
+
+
+})
+
+const cancel = document.querySelector(".cancel")
+cancel.addEventListener("click", () => {
+    dialog("renameImageDialog", "off")
+})
+
+const viewButton = document.querySelector(".viewImage")
+viewButton.addEventListener("click", (e) => {
+
+
+    const path = e.currentTarget.id
+    console.log(path);
+
+})
+
+const saveButton = document.querySelector(".save")
+saveButton.addEventListener("click", (e) => {
+
+    const path = e.currentTarget.id
+    console.log(path);
+
+
+
+
+})
+function dialog(name, on) {
+    console.log("AAA");
+    const dialog = document.querySelector(`#${name}`);
+    if (on == "on") {
+        dialog.showModal();
+    } else if (on == "off") {
+        dialog.close();
+        // window.location.reload();
+    }
+}

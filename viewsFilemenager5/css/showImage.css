@@ -5,10 +5,21 @@
 
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 20px;
 }
+
 .bigImage {
     width: 600px;
     height: 400px;
     background-size: 600px 400px;
     background-repeat: no-repeat;
+}
+
+#renameImageDialog {
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 50px);
+    width: 300px;
+    height: 100px;
 }
