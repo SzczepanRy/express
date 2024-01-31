@@ -39,43 +39,55 @@ Array.from(arrAll).forEach((el) => {
     });
 });
 
-
-
-const renameButton = document.querySelector(".rename")
+const renameButton = document.querySelector(".rename");
 renameButton.addEventListener("click", (e) => {
-
-    const path = e.currentTarget.id
+    const path = e.currentTarget.id;
     console.log(path);
 
-    dialog("renameImageDialog", "on")
+    dialog("renameImageDialog", "on");
+});
 
-
-})
-
-const cancel = document.querySelector(".cancel")
+const cancel = document.querySelector(".cancel");
 cancel.addEventListener("click", () => {
-    dialog("renameImageDialog", "off")
-})
+    dialog("renameImageDialog", "off");
+});
 
-const viewButton = document.querySelector(".viewImage")
-viewButton.addEventListener("click", (e) => {
+const viewButton = document.querySelector(".viewImage");
+viewButton.addEventListener("click", async (e) => {
+    let path = e.currentTarget.id;
+    // console.log(path);
+    // path = path.split("/")[path.split("/").length - 1];
+    // console.log("fetchujeemy" + path);
+    // let res = await fetch(`/viewImg?name=${path}`, {
+    //     method: "get",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    // });
+    location.href = path;
+});
 
+const saveButton = document.querySelector(".save");
+saveButton.addEventListener("click", async (e) => {
+    const path = e.currentTarget.id;
+    console.log("ok save");
 
-    const path = e.currentTarget.id
-    console.log(path);
+    let dataUrl = canvas.toDataURL("image/jpeg");
 
-})
+    let res = await fetch("/saveImg", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            dataUrl: dataUrl,
+            path: path,
+        }),
+    });
+    let data = await res.json();
+    console.log(data.message);
+});
 
-const saveButton = document.querySelector(".save")
-saveButton.addEventListener("click", (e) => {
-
-    const path = e.currentTarget.id
-    console.log(path);
-
-
-
-
-})
 function dialog(name, on) {
     console.log("AAA");
     const dialog = document.querySelector(`#${name}`);

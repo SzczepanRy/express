@@ -16,7 +16,6 @@ app.engine(
         extname: ".hbs",
         partialsDir: "viewsFilemenager5/partials",
         helpers: {
-
             checkIfImg(name) {
                 console.log(name);
                 if (name.toLowerCase().includes(".png") || name.toLowerCase().includes(".jpg")) {
@@ -94,16 +93,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                            ? "/img/jpg.png"
-                            : file.type == "text/plain"
-                                ? "/img/txt.png"
-                                : file.type == "text/javascript"
-                                    ? "/img/javascript.png"
-                                    : file.type == "text/html"
-                                        ? "/img/html.png"
-                                        : file.type == "text/css"
-                                            ? "/img/css.png"
-                                            : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                        ? "/img/txt.png"
+                        : file.type == "text/javascript"
+                        ? "/img/javascript.png"
+                        : file.type == "text/html"
+                        ? "/img/html.png"
+                        : file.type == "text/css"
+                        ? "/img/css.png"
+                        : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -120,16 +119,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                            ? "/img/txt.png"
-                            : file.type == "text/javascript"
-                                ? "/img/javascript.png"
-                                : file.type == "text/html"
-                                    ? "/img/html.png"
-                                    : file.type == "text/css"
-                                        ? "/img/css.png"
-                                        : "/img/file.png";
+                    ? "/img/jpg.png"
+                    : file.type == "text/plain"
+                    ? "/img/txt.png"
+                    : file.type == "text/javascript"
+                    ? "/img/javascript.png"
+                    : file.type == "text/html"
+                    ? "/img/html.png"
+                    : file.type == "text/css"
+                    ? "/img/css.png"
+                    : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -456,7 +455,7 @@ app.get("/renamePath", (req, res) => {
 app.get("/renameFile", (req, res) => {
     let { newName, oldNameReq } = req.query;
 
-    oldName = oldNameReq.split("/")[oldNameReq.split("/").length - 1]
+    oldName = oldNameReq.split("/")[oldNameReq.split("/").length - 1];
     console.log(currentPath, oldName, newName);
 
     fs.rename(
@@ -506,7 +505,6 @@ app.get("/showImage", (req, res) => {
         name,
         effects,
         imagePath: `${currentPath}/${name}`,
-  
     });
 });
 
@@ -516,6 +514,15 @@ app.get("/viewfile", (req, res) => {
     let data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
     res.send("<a href='http://localhost:3000/filemenager2'>home</a> <pre>\n" + data + "\n</pre>");
 });
+
+// app.use("/view", express.static("upload"));
+
+// app.get("/viewImg", (req, res) => {
+//     const { name } = req.query;
+//     console.log(name);
+//     let data = fs.readFileSync(path.join(__dirname, `${currentPath}/${name}`), "utf8");
+//     res.send(data);
+// });
 
 app.get("/getStyles", (req, res) => {
     res.json({ styles });
@@ -532,7 +539,20 @@ app.post("/saveStyles", (req, res) => {
     res.sendStatus(200);
 });
 
+app.use(express.json({ limit: "1gb" }));
 
+app.post("/saveImg", (req, res) => {
+    let { dataUrl, path } = req.body;
+
+    let data = dataUrl.split(",")[1];
+
+    let name = path.split("/")[path.split("/").length - 1];
+
+    const buffer = Buffer.from(data, "base64");
+    fs.writeFileSync(__dirname + `${currentPath}/${name}`, buffer);
+
+    res.json({ message: "ok" });
+});
 
 app.listen(3000, () => {
     console.log("good");
