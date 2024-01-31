@@ -7,6 +7,22 @@
 
     <div class="bigImage" style=" display:'none'; background-image: url('{{imagePath}}');"></div>
 
+    <div class="menu">
+        <button class='rename' id="{{imagePath}}">rename</button>
+        <button class='save' id="{{imagePath}}">save</button>
+        <button class='viewImage' id="{{imagePath}}">view file</button>
+    </div>
+    <dialog id="renameImageDialog">
+
+        {{! on submit if desnt work }}
+        <form method="GET" id="renamePathForm" action="/renameFile">
+            <input name="newName" />
+            <input type="hidden" name="oldNameReq" value="{{imagePath}}" />
+            <button type="submit">upload</button>
+        </form>
+
+        <button class="cancel">close</button>
+    </dialog>
 </div>
 
 <script src="./js/showImage.js"></script>

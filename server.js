@@ -16,6 +16,7 @@ app.engine(
         extname: ".hbs",
         partialsDir: "viewsFilemenager5/partials",
         helpers: {
+
             checkIfImg(name) {
                 console.log(name);
                 if (name.toLowerCase().includes(".png") || name.toLowerCase().includes(".jpg")) {
@@ -93,16 +94,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                        ? "/img/txt.png"
-                        : file.type == "text/javascript"
-                        ? "/img/javascript.png"
-                        : file.type == "text/html"
-                        ? "/img/html.png"
-                        : file.type == "text/css"
-                        ? "/img/css.png"
-                        : "/img/file.png";
+                            ? "/img/jpg.png"
+                            : file.type == "text/plain"
+                                ? "/img/txt.png"
+                                : file.type == "text/javascript"
+                                    ? "/img/javascript.png"
+                                    : file.type == "text/html"
+                                        ? "/img/html.png"
+                                        : file.type == "text/css"
+                                            ? "/img/css.png"
+                                            : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -119,16 +120,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                    ? "/img/jpg.png"
-                    : file.type == "text/plain"
-                    ? "/img/txt.png"
-                    : file.type == "text/javascript"
-                    ? "/img/javascript.png"
-                    : file.type == "text/html"
-                    ? "/img/html.png"
-                    : file.type == "text/css"
-                    ? "/img/css.png"
-                    : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                            ? "/img/txt.png"
+                            : file.type == "text/javascript"
+                                ? "/img/javascript.png"
+                                : file.type == "text/html"
+                                    ? "/img/html.png"
+                                    : file.type == "text/css"
+                                        ? "/img/css.png"
+                                        : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -453,8 +454,10 @@ app.get("/renamePath", (req, res) => {
 });
 
 app.get("/renameFile", (req, res) => {
-    const { newName, oldName } = req.query;
-    console.log(currentPath);
+    let { newName, oldNameReq } = req.query;
+
+    oldName = oldNameReq.split("/")[oldNameReq.split("/").length - 1]
+    console.log(currentPath, oldName, newName);
 
     fs.rename(
         path.join(__dirname, `${currentPath}/${oldName}`),
@@ -528,6 +531,8 @@ app.post("/saveStyles", (req, res) => {
     console.log(styles);
     res.sendStatus(200);
 });
+
+
 
 app.listen(3000, () => {
     console.log("good");
