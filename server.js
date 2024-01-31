@@ -503,7 +503,7 @@ app.get("/showImage", (req, res) => {
         name,
         effects,
         imagePath: `${currentPath}/${name}`,
-        nav: `${currentPath}/${name}`,
+  
     });
 });
 
