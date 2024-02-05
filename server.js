@@ -93,16 +93,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                        ? "/img/txt.png"
-                        : file.type == "text/javascript"
-                        ? "/img/javascript.png"
-                        : file.type == "text/html"
-                        ? "/img/html.png"
-                        : file.type == "text/css"
-                        ? "/img/css.png"
-                        : "/img/file.png";
+                            ? "/img/jpg.png"
+                            : file.type == "text/plain"
+                                ? "/img/txt.png"
+                                : file.type == "text/javascript"
+                                    ? "/img/javascript.png"
+                                    : file.type == "text/html"
+                                        ? "/img/html.png"
+                                        : file.type == "text/css"
+                                            ? "/img/css.png"
+                                            : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -119,16 +119,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                    ? "/img/jpg.png"
-                    : file.type == "text/plain"
-                    ? "/img/txt.png"
-                    : file.type == "text/javascript"
-                    ? "/img/javascript.png"
-                    : file.type == "text/html"
-                    ? "/img/html.png"
-                    : file.type == "text/css"
-                    ? "/img/css.png"
-                    : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                            ? "/img/txt.png"
+                            : file.type == "text/javascript"
+                                ? "/img/javascript.png"
+                                : file.type == "text/html"
+                                    ? "/img/html.png"
+                                    : file.type == "text/css"
+                                        ? "/img/css.png"
+                                        : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -456,6 +456,16 @@ app.get("/renameFile", (req, res) => {
     let { newName, oldNameReq } = req.query;
 
     oldName = oldNameReq.split("/")[oldNameReq.split("/").length - 1];
+
+    let newNameArr = newName.split(".")
+
+    if (newNameArr[newNameArr.length - 1] == "png" || newNameArr[newNameArr.length - 1] == "jpg") {
+        newName = newNameArr.join(".")
+    } else {
+        newNameArr.push("jpg")
+        newName = newNameArr.join(".")
+    }
+
     console.log(currentPath, oldName, newName);
 
     fs.rename(
@@ -555,5 +565,5 @@ app.post("/saveImg", (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log("good");
+    console.log("good on 3000");
 });
