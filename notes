@@ -1,0 +1,14 @@
+https://dev.to/marienoir/understanding-relationships-in-typeorm-4873
+
+messages => group
+users => group
+
+on user write one to one i think..
+
+users => messages one to meany 
+
+
+
+
+
+
