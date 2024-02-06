@@ -8,13 +8,13 @@ const { log } = require("console");
 const fse = require("fs-extra");
 
 app.use(express.json());
-app.set("views", path.join(__dirname, "viewsFilemenager6")); // ustalamy katalog views
+app.set("views", path.join(__dirname, "viewsFilemenager5")); // ustalamy katalog views
 app.engine(
     "hbs",
     hbs({
         defaultLayout: "main.hbs",
         extname: ".hbs",
-        partialsDir: "viewsFilemenager6/partials",
+        partialsDir: "viewsFilemenager5/partials",
         helpers: {
             checkIfImg(name) {
                 console.log(name);
@@ -59,7 +59,7 @@ app.engine(
         },
     })
 );
-app.use(express.static(path.join(__dirname, "/viewsFilemenager6")));
+app.use(express.static(path.join(__dirname, "/viewsFilemenager5")));
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
@@ -563,24 +563,6 @@ app.post("/saveImg", (req, res) => {
 
     res.json({ message: "ok" });
 });
-
-app.get("/redgister", (req, res) => {
-    res.render("redgister.hbs")
-})
-
-
-app.post("/postRedgister", (req, res) => {
-    console.log(req.body);
-    const { login, password } = req.body
-    fs.readFile(__dirname + '/static/db.json', 'utf8', function (err, data) {
-        let usersJson = JSON.parse(data)
-        console.log(usersJson);
-        usersJson.users.push({ login, password })
-        fs.writeFile(__dirname + '/static/db.json', JSON.stringify(usersJson), () => { })
-    });
-    res.send("ok")
-
-})
 
 app.listen(3000, () => {
     console.log("good on 3000");

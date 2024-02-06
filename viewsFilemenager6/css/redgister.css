@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.redgister {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redgisterform {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: darkblue;
+    border-radius: 20px;
+}
+
+.redgisterBtn {
+    all: unset;
+    font-family: monospace;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: darkblue;
+    display: none;
+}
+
+input {
+    all: unset;
+    font-family: monospace;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: darkblue;
+}
+
+.redgisterBtn:hover {
+    color: white;
+    background-color: darkblue;
+    border: 2px solid white;
+    padding: 8px;
+
+}
