@@ -57,7 +57,7 @@ img {
     width: 100%;
 }
 
-.title>td {
+.title > td {
     color: white;
     font-family: monospace;
     font-weight: 400;
@@ -72,7 +72,7 @@ img {
     word-wrap: break-word;
 }
 
-.file>td {
+.file > td {
     color: darkslateblue;
     font-family: monospace;
     font-weight: 1000;
@@ -118,21 +118,21 @@ img {
     max-width: 120px;
 }
 
-.file2>div {
+.file2 > div {
     padding: 0px 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.file2>div>button {
+.file2 > div > button {
     all: unset;
     padding: 2px;
     border-radius: 3px;
     border: black 1px solid;
 }
 
-.file2>p {
+.file2 > p {
     text-overflow: ellipsis;
     padding: 5px;
     overflow: hidden;
@@ -141,4 +141,10 @@ img {
 .tree {
     display: flex;
     gap: 10px;
+}
+main {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - 80px);
 }

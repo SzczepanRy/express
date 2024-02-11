@@ -1,4 +1,7 @@
 <link rel='stylesheet' href='css/upload.css' />
+{{> nav}}
+<main>
+
 {{> aside currentPage=currentPage deleteAll=delete}}
 <div class='uploadForm'>
 	<form enctype='multipart/form-data' method='POST' action='/upload'>
@@ -6,3 +9,4 @@
 		<button class='sub' type='submit'>upload</button>
 	</form>
 </div>
+</main>

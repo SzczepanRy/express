@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-.redgister {
+.loginBg {
     width: 100vw;
     height: calc(100vh - 80px);
     display: flex;
@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.redgisterform {
+.loginform {
     height: 400px;
     width: 400px;
     display: flex;
@@ -23,7 +23,7 @@
     border-radius: 20px;
 }
 
-.redgisterBtn {
+.loginBtn {
     all: unset;
     font-family: monospace;
     font-weight: 600;
@@ -44,7 +44,7 @@ input {
     color: darkblue;
 }
 
-.redgisterBtn:hover {
+.loginBtn:hover {
     color: white;
     background-color: darkblue;
     border: 2px solid white;
@@ -56,7 +56,7 @@ input {
 h3 {
     color: white;
 }
-.menuR > p > a {
+.menuL > p > a {
     all: unset;
     color: white;
     text-decoration: underline;

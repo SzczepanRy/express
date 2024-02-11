@@ -1,16 +1,22 @@
 .fileInfo {
-	padding: 20px;
+    padding: 20px;
 }
 
 .fileInfo > div {
-	font-size: 24px;
-	margin: 10px;
-	font-family: monospace;
-	font-weight: 400;
-	color: gray;
-	word-break: break-all;
+    font-size: 24px;
+    margin: 10px;
+    font-family: monospace;
+    font-weight: 400;
+    color: gray;
+    word-break: break-all;
 }
 
 .fileInfo > div > span {
-	color: darkblue;
+    color: darkblue;
+}
+main {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - 80px);
 }

@@ -1,16 +1,23 @@
 .uploadform {
-	padding: 40px;
-	display: flex;
-	flex-direction: column;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .uploadform > form {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .sub {
-	margin: 20px 0px;
-	width: 100px;
-	height: 20px;
+    margin: 20px 0px;
+    width: 100px;
+    height: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - 80px);
 }

@@ -74,6 +74,7 @@ let styles = {
     color: "white",
     size: 14,
 };
+let currentUser = "";
 
 const effects = [{ name: "grayscale" }, { name: "invert" }, { name: "sepia" }];
 
@@ -93,16 +94,16 @@ app.post("/upload", (req, res) => {
                     file.type == "image/png"
                         ? "/img/png.png"
                         : file.type == "image/jpeg"
-                            ? "/img/jpg.png"
-                            : file.type == "text/plain"
-                                ? "/img/txt.png"
-                                : file.type == "text/javascript"
-                                    ? "/img/javascript.png"
-                                    : file.type == "text/html"
-                                        ? "/img/html.png"
-                                        : file.type == "text/css"
-                                            ? "/img/css.png"
-                                            : "/img/file.png";
+                        ? "/img/jpg.png"
+                        : file.type == "text/plain"
+                        ? "/img/txt.png"
+                        : file.type == "text/javascript"
+                        ? "/img/javascript.png"
+                        : file.type == "text/html"
+                        ? "/img/html.png"
+                        : file.type == "text/css"
+                        ? "/img/css.png"
+                        : "/img/file.png";
                 let name = file.name;
                 let size = file.size;
                 let type = file.type;
@@ -119,16 +120,16 @@ app.post("/upload", (req, res) => {
                 file.type == "image/png"
                     ? "/img/png.png"
                     : file.type == "image/jpeg"
-                        ? "/img/jpg.png"
-                        : file.type == "text/plain"
-                            ? "/img/txt.png"
-                            : file.type == "text/javascript"
-                                ? "/img/javascript.png"
-                                : file.type == "text/html"
-                                    ? "/img/html.png"
-                                    : file.type == "text/css"
-                                        ? "/img/css.png"
-                                        : "/img/file.png";
+                    ? "/img/jpg.png"
+                    : file.type == "text/plain"
+                    ? "/img/txt.png"
+                    : file.type == "text/javascript"
+                    ? "/img/javascript.png"
+                    : file.type == "text/html"
+                    ? "/img/html.png"
+                    : file.type == "text/css"
+                    ? "/img/css.png"
+                    : "/img/file.png";
 
             let name = file.name;
             let size = file.size;
@@ -446,7 +447,7 @@ app.get("/renamePath", (req, res) => {
         fs.rmdirSync(path.join(__dirname, `${currentPath}`), { recursive: true });
 
         currentPath = newPath;
-        res.redirect("/filemenager2");
+        v;
     } else {
         res.json({ message: "fail" });
     }
@@ -457,13 +458,13 @@ app.get("/renameFile", (req, res) => {
 
     oldName = oldNameReq.split("/")[oldNameReq.split("/").length - 1];
 
-    let newNameArr = newName.split(".")
+    let newNameArr = newName.split(".");
 
     if (newNameArr[newNameArr.length - 1] == "png" || newNameArr[newNameArr.length - 1] == "jpg") {
-        newName = newNameArr.join(".")
+        newName = newNameArr.join(".");
     } else {
-        newNameArr.push("jpg")
-        newName = newNameArr.join(".")
+        newNameArr.push("jpg");
+        newName = newNameArr.join(".");
     }
 
     console.log(currentPath, oldName, newName);
@@ -549,8 +550,6 @@ app.post("/saveStyles", (req, res) => {
     res.sendStatus(200);
 });
 
-app.use(express.json({ limit: "1gb" }));
-
 app.post("/saveImg", (req, res) => {
     let { dataUrl, path } = req.body;
 
@@ -565,22 +564,75 @@ app.post("/saveImg", (req, res) => {
 });
 
 app.get("/redgister", (req, res) => {
-    res.render("redgister.hbs")
-})
-
+    res.render("redgister.hbs");
+});
+app.get("/login", (req, res) => {
+    res.render("login.hbs");
+});
 
 app.post("/postRedgister", (req, res) => {
     console.log(req.body);
-    const { login, password } = req.body
-    fs.readFile(__dirname + '/static/db.json', 'utf8', function (err, data) {
-        let usersJson = JSON.parse(data)
-        console.log(usersJson);
-        usersJson.users.push({ login, password })
-        fs.writeFile(__dirname + '/static/db.json', JSON.stringify(usersJson), () => { })
-    });
-    res.send("ok")
+    const { login, password } = req.body;
+    if (!login) {
+        res.json({ message: "bad login" });
+    } else {
+        fs.readFile(__dirname + "/static/db.json", "utf8", function (err, data) {
+            let usersJson = JSON.parse(data);
+            console.log(usersJson);
+            usersJson.users.push({ login, password });
+            fs.writeFile(__dirname + "/static/db.json", JSON.stringify(usersJson), () => {
+                console.log(login);
+                if (!fs.existsSync(path.join(__dirname, `/upload/${login}`))) {
+                    fs.mkdir(path.join(__dirname, `/upload/${login}`), (err) => {
+                        if (err) throw err;
+                        console.log("added Home folder");
+                        console.log(login);
+                        // currentPath += "/" + login;
+                    });
 
-})
+                    res.redirect("/login");
+                } else {
+                    // currentPath += "/" + login;
+
+                    res.redirect("/redgister");
+                }
+            });
+        });
+    }
+});
+app.post("/postLogin", (req, res) => {
+    console.log(req.body);
+    const { login, password } = req.body;
+    if (!login) {
+        res.json({ message: "invalid login" });
+    } else {
+        fs.readFile(__dirname + "/static/db.json", "utf8", function (err, data) {
+            let usersJson = JSON.parse(data);
+            let valid = false;
+            usersJson.users.map((user) => {
+                if (user.login == login && user.password == password) {
+                    valid = true;
+                }
+            });
+            if (valid) {
+                currentPath += "/" + login;
+                res.redirect("/filemenager2");
+            } else {
+                res.redirect("/login");
+            }
+        });
+    }
+});
+
+app.get("/logout", (req, res) => {
+    filesArr = [];
+    currentPath = "/upload";
+    styles = {
+        color: "white",
+        size: 14,
+    };
+    res.redirect("/login");
+});
 
 app.listen(3000, () => {
     console.log("good on 3000");
