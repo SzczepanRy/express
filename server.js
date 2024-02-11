@@ -6,7 +6,10 @@ const formidable = require("formidable");
 const fs = require("fs");
 const { log } = require("console");
 const fse = require("fs-extra");
-
+const cookieparser = require("cookie-parser");
+const nocache = require("nocache");
+app.use(nocache());
+app.use(cookieparser());
 app.use(express.json());
 app.set("views", path.join(__dirname, "viewsFilemenager6")); // ustalamy katalog views
 app.engine(
@@ -154,6 +157,21 @@ app.get("/filemenager", (req, res) => {
 });
 
 app.get("/filemenager2", (req, res) => {
+    console.log("COOOKIR " + req.cookies.login);
+
+    fs.readFile(__dirname + "/static/db.json", "utf8", function (err, data) {
+        let usersJson = JSON.parse(data);
+        let valid = false;
+        usersJson.users.map((user) => {
+            if (user.login == req.cookies.login) {
+                valid = true;
+            }
+        });
+        if (!valid) {
+            res.redirect("/login");
+        }
+    });
+
     let filenames = fs.readdirSync(path.join(__dirname, `${currentPath}/`));
 
     let types = ["css", "html", "txt", "js", "png", "jpg", "folder"];
@@ -616,7 +634,7 @@ app.post("/postLogin", (req, res) => {
             });
             if (valid) {
                 currentPath += "/" + login;
-                res.redirect("/filemenager2");
+                res.cookie("login", login, { httpOnly: true, maxAge: 30 * 1000 }).redirect("/filemenager2");
             } else {
                 res.redirect("/login");
             }
@@ -631,6 +649,7 @@ app.get("/logout", (req, res) => {
         color: "white",
         size: 14,
     };
+    res.clearCookie("login");
     res.redirect("/login");
 });
 

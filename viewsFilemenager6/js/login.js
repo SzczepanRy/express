@@ -22,6 +22,7 @@ loginBtn.addEventListener("click", async () => {
     if (res.message) {
         p.innerHTML = res.message;
     }
+    console.log(res);
     // document.querySelector(".loginBtn").style.display = "block";
 
     // document.querySelector(".loginBtn").style.display = "none";
